@@ -1,0 +1,51 @@
+#!/bin/busybox sh
+
+export PATH=/bin:/sbin
+
+mount -t proc proc /proc
+mount -t sysfs sysfs /sys
+mount -t devtmpfs devtmpfs /dev
+
+echo "[init] starting live initramfs"
+
+# modüller (hata verse bile devam)
+for m in loop squashfs overlay iso9660 vfat ext4 usb-storage sd-mod nvme virtio_blk; do
+    modprobe $m 2>/dev/null
+done
+
+mkdir -p /mnt /ro /rw /newroot
+
+sleep 2
+
+echo "[init] searching filesystem.squashfs"
+
+FOUND=""
+
+for dev in /dev/disk/by-label/* /dev/sd* /dev/nvme* /dev/loop*; do
+    mount "$dev" /mnt 2>/dev/null || continue
+
+    if [ -f /mnt/live/filesystem.squashfs ]; then
+        FOUND=1
+        echo "[init] found on $dev"
+        break
+    fi
+
+    umount /mnt
+done
+
+if [ -z "$FOUND" ]; then
+    echo "[init] ERROR: filesystem.squashfs not found"
+    exec sh
+fi
+
+mount -t squashfs /mnt/live/filesystem.squashfs /ro
+
+mount -t tmpfs tmpfs /rw
+mkdir -p /rw/upper /rw/work
+
+mount -t overlay overlay \
+    -o lowerdir=/ro,upperdir=/rw/upper,workdir=/rw/work \
+    /newroot
+
+echo "[init] switching root"
+exec switch_root /newroot /sbin/init

@@ -1,0 +1,58 @@
+gwenview-kf6 kded değiştir kded-kf6
+
+kate-kf6 kded değiştir kded-kf6
+
+spectacle-kf6 kwayland  değiş kwayland-kf6
+
+
+
+
+
+pisi@pisilinux2: ~ $ sudo pisi rm kconfig
+Bağımlılıkları sağlamak için bu paketler verilen sırada kaldırılacaktır:
+gwenview-kf6 kate-kf6 kded kservice kconfig
+Devam etmek istiyor musunuz? (evet/hayır)h
+Paket kaldırmaya izin verilmedi.
+pisi@pisilinux2: ~ $ sudo pisi rm kcoreaddons
+Parola:
+Bağımlılıkları sağlamak için bu paketler verilen sırada kaldırılacaktır:
+gwenview-kf6 kate-kf6 kded kservice kcoreaddons
+Devam etmek istiyor musunuz? (evet/hayır)h
+Paket kaldırmaya izin verilmedi.
+pisi@pisilinux2: ~ $ sudo pisi rm kcrash
+Bağımlılıkları sağlamak için bu paketler verilen sırada kaldırılacaktır:
+gwenview-kf6 kate-kf6 kded kservice kcrash
+Devam etmek istiyor musunuz? (evet/hayır)h
+Paket kaldırmaya izin verilmedi.
+pisi@pisilinux2: ~ $ sudo pisi rm kdbusaddons
+Bağımlılıkları sağlamak için bu paketler verilen sırada kaldırılacaktır:
+gwenview-kf6 kate-kf6 kded kservice kdbusaddons
+Devam etmek istiyor musunuz? (evet/hayır)h
+Paket kaldırmaya izin verilmedi.
+pisi@pisilinux2: ~ $ sudo pisi rm kded
+Bağımlılıkları sağlamak için bu paketler verilen sırada kaldırılacaktır:
+gwenview-kf6 kate-kf6 kded
+Devam etmek istiyor musunuz? (evet/hayır)h
+Paket kaldırmaya izin verilmedi.
+pisi@pisilinux2: ~ $ sudo pisi rm ki18n
+Bağımlılıkları sağlamak için bu paketler verilen sırada kaldırılacaktır:
+gwenview-kf6 kate-kf6 kded kservice ki18n
+Devam etmek istiyor musunuz? (evet/hayır)h
+Paket kaldırmaya izin verilmedi.
+pisi@pisilinux2: ~ $ sudo pisi rm kservice
+Bağımlılıkları sağlamak için bu paketler verilen sırada kaldırılacaktır:
+gwenview-kf6 kate-kf6 kded kservice
+Devam etmek istiyor musunuz? (evet/hayır)h
+Paket kaldırmaya izin verilmedi.
+pisi@pisilinux2: ~ $ sudo pisi rm kwayland
+Bağımlılıkları sağlamak için bu paketler verilen sırada kaldırılacaktır:
+spectacle-kf6 kwayland
+Devam etmek istiyor musunuz? (evet/hayır)h
+Paket kaldırmaya izin verilmedi.
+pisi@pisilinux2: ~ $ sudo pisi rm kwindowsystem
+Bağımlılıkları sağlamak için bu paketler verilen sırada kaldırılacaktır:
+kate-kf6 kservice gwenview-kf6 kded kcrash kwindowsystem
+Devam etmek istiyor musunuz? (evet/hayır)h
+Paket kaldırmaya izin verilmedi.
+pisi@pisilinux2: ~ $
+

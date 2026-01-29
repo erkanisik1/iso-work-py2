@@ -1,0 +1,7 @@
+eog-plugins
+eog
+gnome-photos
+gnome-tweaks
+libmanette
+tracker
+xdg-user-dirs-gtk

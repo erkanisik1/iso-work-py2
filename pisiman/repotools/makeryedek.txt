@@ -1,0 +1,178 @@
+        the_iso_command2 = 'xorriso -as mkisofs \
+        -f -V "%s" -o "%s" \
+        -J -joliet-long \
+        -b isolinux/isolinux.bin \
+        -c isolinux/boot.cat \
+        -no-emul-boot \
+        -boot-load-size 4 \
+        -boot-info-table \
+        -eltorito-alt-boot \
+        -eltorito-platform efi \
+        -e efi.img \
+        -no-emul-boot \
+        -isohybrid-gpt-basdat \
+        -partition_offset 16 \
+        -publisher "%s" -A "%s" "%s"' % (
+            label, iso_file, publisher, application, iso_dir)
+
+
+        the_iso_command3 = 'xorriso -as mkisofs \
+        -f -R -V "%s" -o "%s" \
+        -J -joliet-long \
+        -b isolinux/isolinux.bin \
+        -c isolinux/boot.cat \
+        -no-emul-boot \
+        -boot-load-size 4 \
+        -boot-info-table \
+        -eltorito-alt-boot \
+        -eltorito-platform efi \
+        -e efi.img \
+        -no-emul-boot \
+        -isohybrid-gpt-basdat \
+        -partition_offset 16 \
+        -publisher "%s" -A "%s" \
+        -graft-points \
+        /="%s"' % (
+            label, iso_file, publisher, application, iso_dir)
+        
+        the_iso_command4 = 'xorriso -as mkisofs \
+        -f -R -V "%s" -o "%s" \
+        -J -joliet-long \
+        -b isolinux/isolinux.bin \
+        -c isolinux/boot.cat \
+        -no-emul-boot \
+        -boot-load-size 4 \
+        -boot-info-table \
+        -eltorito-alt-boot \
+        -eltorito-platform efi \
+        -e efi.img \
+        -no-emul-boot \
+        -isohybrid-gpt-basdat \
+        -partition_offset 16 \
+        -publisher "%s" -A "%s" \
+        -graft-points \
+        /etc/polkit-1/rules.d/="%s/etc/polkit-1/rules.d" \
+        /="%s"' % (
+            label, iso_file, publisher, application, image_dir, iso_dir)
+        
+        the_iso_command5 = 'xorriso -as mkisofs \
+        -o %s \
+        -V %s \
+        -J -joliet-long \
+        -rational-rock \
+        -cache-inodes \
+        -isohybrid-mbr /usr/lib/syslinux/bios/isohdpfx.bin \
+        -c isolinux/boot.cat \
+        -b isolinux/isolinux.bin \
+        -no-emul-boot \
+        -boot-load-size 4 \
+        -boot-info-table \
+        -eltorito-alt-boot \
+        -e --interval:appended_partition_2:all:: \
+        -no-emul-boot \
+        -isohybrid-gpt-basdat \
+        -append_partition 2 0xef %s/efi.img \
+        -appended_part_as_gpt \
+        -partition_offset 16 \
+        -publisher "%s" \
+        -A "%s" \
+        %s' % (
+            iso_file, label, iso_dir, publisher, application, iso_dir)
+
+
+        the_iso_command1 = 'xorriso -as mkisofs \
+        -f -V "%s" -o "%s" \
+        -J -joliet-long -cache-inodes \
+        -b isolinux/isolinux.bin \
+        -c isolinux/boot.cat \
+        -no-emul-boot \
+        -boot-load-size 4 \
+        -boot-info-table \
+        -eltorito-alt-boot \
+        -eltorito-platform efi \
+        -e EFI/BOOT/BOOTX64.EFI \
+        -no-emul-boot \
+        -publisher "%s" -A "%s" "%s"' % (
+            label, iso_file, publisher, application, iso_dir)
+        
+        the_sorted_iso_command = 'genisoimage -f -sort %s/repo/install.order \
+        -J -r -l -V "%s" -o "%s" -b isolinux/isolinux.bin \
+        -c isolinux/boot.cat -boot-info-table \
+        -uid 0 -gid 0 -udf -allow-limited-size -iso-level 3 \
+        -input-charset utf-8 -no-emul-boot -boot-load-size 4 \
+        -eltorito-alt-boot -e EFI/pisi/initrd.img -no-emul-boot \
+        -publisher "%s" -A "%s"  %s' % (
+            iso_dir, label, iso_file, publisher, application, iso_dir)
+
+        # the_iso_command = 'genisoimage -f -J -r -l -V "%s" -o "%s" \
+        # -b isolinux/isolinux.bin -c isolinux/boot.cat \
+        # -boot-info-table -uid 0 -gid 0 -allow-limited-size -iso-level 3 \
+        # -input-charset utf-8 -no-emul-boot -boot-load-size 4 \
+        # -eltorito-alt-boot -e efi.img -no-emul-boot \
+        # -publisher "%s" -A "%s"  %s' % (label, iso_file, publisher,
+        #   application, iso_dir)
+
+        # TODO: https://github.com/sallecta/timbrel/blob/35db4cc767ebdf51db51dd8f06803252e5f58499/src/utilities.py
+
+        # the_iso_command = 'xorriso -as mkisofs \
+        # -f  -V "%s"\
+        # -o "%s" \
+        # -isohybrid-mbr /usr/lib/syslinux/bios/isohdpfx.bin \
+        # -c isolinux/boot.cat \
+        # -b isolinux/isolinux.bin \
+        # -no-emul-boot -boot-load-size 4 -boot-info-table \
+        # -eltorito-alt-boot \
+        # -e efi.img \
+        # -no-emul-boot \
+        # -isohybrid-gpt-basdat \
+        # -publisher "%s" -A "%s"  %s' % (
+        #     label, iso_file, publisher, application, iso_dir)
+        
+        the_iso_command3 = 'xorriso -as mkisofs \
+        -f  -V "%s" -cache-inodes -J -l\
+        -iso-level 3 \
+        -o "%s" \
+        -isohybrid-mbr /usr/lib/syslinux/bios/isohdpfx.bin \
+        -c isolinux/boot.cat \
+        -b isolinux/isolinux.bin \
+        -no-emul-boot -boot-load-size 4 -boot-info-table \
+        -eltorito-alt-boot \
+        -e efi.img \
+        -no-emul-boot \
+        -isohybrid-gpt-basdat \
+        -append_partition 2 0xef %s/efi.img \
+        -partition_cyl_align all \
+        -publisher "%s" -A "%s"  %s' % (
+            label, iso_file, iso_dir, publisher, application, iso_dir)
+
+
+        # for grub2-mkrescue ---------------------------------------------------
+        # the_iso_command = 'grub2-mkrescue -v \
+        # --themes=pisilinux \
+        # --product-name "%s"\
+        # -o "%s" \
+        # --rom-directory=%s \
+        # %s' % (
+        #     label, iso_file, image_dir, iso_dir)
+        # for grub2-mkrescue ---------------------------------------------------
+
+
+        # Generate sort_list for mkisofs and YALI
+        # Disabled for now
+
+
+
+        # INFO:
+        # sqfs kurulum yapan yali için kaldırıldı
+
+        # if project.type == "install":
+        # if "Calamares" in project.all_packages:
+        #     run("rm -rf %s/license" % iso_dir, ignore_error=True)
+        #     run("rm -rf %s/release-notes" % iso_dir, ignore_error=True)
+        # else:
+        #     run('ln -s "%s" "%s"' % (
+        #         project.install_repo_dir(), os.path.join(iso_dir, "repo")))
+ # convert iso to a hybrid one
+        # run("isohybrid --uefi %s" % iso_file)
+        # run("isohybrid %s -b %s" % (
+        #   iso_file, "%s/usr/lib/syslinux/bios/isohdpfx.bin" % image_dir))

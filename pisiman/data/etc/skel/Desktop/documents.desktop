@@ -1,0 +1,14 @@
+[Desktop Entry]
+Type=Application
+Version=1.1
+Name[tr]=Belgelerim
+Name[en]=Documents
+GenericName[tr]=Belgeler Klasörü
+GenericName[en]=Documents Folder
+Comment[tr]=Kişisel belgeleriniz
+Comment[en]=Personal documents
+Icon=folder-documents
+Exec=dolphin $(xdg-user-dir DOCUMENTS)
+Terminal=false
+StartupNotify=true
+Categories=Utility;FileManager;

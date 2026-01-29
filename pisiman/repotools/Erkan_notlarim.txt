@@ -1,0 +1,1 @@
+maker.py dosyasında 185. satırda kapatma yapıldı

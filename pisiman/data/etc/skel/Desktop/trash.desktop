@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Link
+Name[tr]=Çöp Kutusu
+Name[en]=Trash
+Comment[tr]=Silinmiş dosyaları görüntüle veya geri yükle
+Comment[en]=View or restore deleted files
+Icon=user-trash
+URL=trash:/

@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Link
+Name[tr]=Bilgisayarım
+Name[en]=Computer
+Comment[tr]=Sistemdeki sürücüleri ve aygıtları görüntüle
+Comment[en]=Browse all local and remote disks and folders
+Icon=computer
+URL=/

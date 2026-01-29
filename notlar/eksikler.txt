@@ -1,0 +1,28 @@
+şlem 7: kur
+Tarih: 2023-11-07 23:52
+
+    * pulseaudio 16.1-18-p2-x86_64 kuruldu.
+
+İşlem 6: kur
+Tarih: 2023-11-07 23:50
+
+    * libmpeg2 0.5.1-5-p2-x86_64 kuruldu.
+    * gst-python 1.16.2-18-p2-x86_64 kuruldu.
+    * gst-rtsp-server 1.22.6-14-p2-x86_64 kuruldu.
+    * gst-plugins-ugly 1.22.6-26-p2-x86_64 kuruldu.
+    * gst-python3 1.22.6-21-p2-x86_64 kuruldu.
+
+İşlem 5: kur
+Tarih: 2023-11-07 23:49
+
+    * libxmlpp 3.2.0-5-p2-x86_64 kuruldu.
+    * gstreamermm 1.10.0-22-p2-x86_64 kuruldu.
+
+İşlem 4: kur
+Tarih: 2023-11-07 23:48
+
+    * package-manager 4.2.7.2-27-p2-x86_64 kuruldu.
+
+İşlem 3: depo güncellemesi
+Tarih: 2023-11-07 23:47
+
