@@ -299,35 +299,35 @@ def generate_isolinux_conf(project):
 
     if project.type != "live":
         dict["rescue_template"] = """
-label rescue
-    kernel /pisi/boot/kernel
-    append initrd=/pisi/boot/initrd yali=rescue %(exparams)s
-""" % dict
+        label rescue
+            kernel /pisi/boot/kernel
+            append initrd=/pisi/boot/initrd yali=rescue %(exparams)s
+        """ % dict
     else:
         dict['exparams'] += "mudur=livecd"
 
     isolinux_tmpl = """
-default start
-implicit 1
-ui gfxboot bootlogo
-prompt   1
-timeout  200
+        default start
+        implicit 1
+        ui gfxboot bootlogo
+        prompt   1
+        timeout  200
 
-label %(title)s
-    kernel /pisi/boot/kernel
-    append initrd=/pisi/boot/initrd %(exparams)s
+        label %(title)s
+            kernel /pisi/boot/kernel
+            append initrd=/pisi/boot/initrd %(exparams)s
 
-%(rescue_template)s
+        %(rescue_template)s
 
-label harddisk
-    localboot 0x80
+        label harddisk
+            localboot 0x80
 
-label memtest
-    kernel /pisi/boot/memtest
+        label memtest
+            kernel /pisi/boot/memtest
 
-label hardware
-    kernel hdt.c32
-"""
+        label hardware
+            kernel hdt.c32
+    """
 
     # write isolinux.cfg
     dest = os.path.join(iso_dir, "isolinux/isolinux.cfg")
@@ -468,30 +468,7 @@ def setup_live_sddm(project):
 def setup_live_lxdm(project):
     image_dir = project.image_dir()
     shutil.copy("./data/lxdm/lxdm.conf", "{}/etc/lxdm/".format(image_dir))
-    """
-    lxdmconf_path = os.path.join(image_dir, "etc/lxdm/lxdm.conf")
-    if os.path.exists(lxdmconf_path):
-        lines = []
-        for line in open(lxdmconf_path, "r").readlines():
-            if line.startswith("# autologin=") or line.startswith("autologin="):
-                lines.append("autologin=pisi\n \
-                session=/usr/bin/startkde\n")
-            elif line.startswith("session="):
-                if os.path.exists("%s/usr/bin/mate-session" % image_dir):
-                    lines.append("session=/usr/bin/mate-session\n")
-                elif os.path.exists("%s/usr/bin/startxfce4" % image_dir):
-                    lines.append("session=/usr/bin/startxfce4\n")
-                elif os.path.exists("%s/usr/bin/startlxqt" % image_dir):
-                    lines.append("session=/usr/bin/startlxqt\n")
-                elif os.path.exists("%s/usr/bin/startlxde" % image_dir):
-                    lines.append("session=/usr/bin/startlxde\n")
-            else:
-                lines.append(line)
-        open(lxdmconf_path, "w").write("".join(lines))
-    else:
-        print("*** {} doesn't exist, setup_live_lxdm() returned".format(
-            lxdmconf_path))
-    """
+
 
 def setup_live_lightdm(project):
     image_dir = project.image_dir()
@@ -690,26 +667,12 @@ def squash_live_config_image(project):
             chrun2("service dbus restart")
             chrun2("/usr/bin/pisi configure-pending -dv")
 
-    if project.type == "install":
-        if "xdm" in project.all_install_image_packages:
-            # FIXME: Do not hard code installer name
-            dm_config = "DISPLAY_MANAGER=yali"
-
-            # Write default display manager config
-            image_dir = project.image_dir()
-            # dest = os.path.join(image_dir, "etc/conf.d/xdm")
-            dest = os.path.join(image_dir, "etc/default/xdm")
-
-            f = open(dest, "w")
-            f.write(dm_config)
-            f.close()
-
     if project.type == "live":
         # cp2skel("./data/yali/yali.desktop", ".config/autostart")
         shutil.copy("./data/yali/yali.desktop",
                     "{}/usr/share/applications/".format(config_image_dir))
         shutil.copy("./data/yali/yali.desktop",
-                    "{}/home/pisi/Masaüstü/".format(config_image_dir))
+                    "{}/home/pisi/Desktop/".format(config_image_dir))
      
         # shutil.copy("./data/yali/yali.desktop",
         #             "{}/home/pisi/.config/autostart/".format(config_image_dir))
@@ -742,9 +705,23 @@ def squash_live_config_image(project):
 
         # kde yapılandırması ================================================
         # setup_live_sddm(project)
-
+        
+        # xfce4 yapılandırması
 
     if project.type == "install":
+        if "xdm" in project.all_install_image_packages:
+            # FIXME: Do not hard code installer name
+            dm_config = "DISPLAY_MANAGER=yali"
+
+            # Write default display manager config
+            image_dir = project.image_dir()
+            # dest = os.path.join(image_dir, "etc/conf.d/xdm")
+            dest = os.path.join(image_dir, "etc/default/xdm")
+
+            f = open(dest, "w")
+            f.write(dm_config)
+            f.close()
+
         if os.path.exists("%s/run/livemedia" % image_dir):
             run("rm %s/run/livemedia" % image_dir)
 
@@ -807,8 +784,6 @@ def squash_image(project):
         # cp2skel("./data/yali/yali.desktop", ".config/autostart")
         shutil.copy("./data/yali/yali.desktop",
                     "{}/usr/share/applications/".format(image_dir))
-        # shutil.copy("./data/yali/yali.desktop",
-        #             "{}/home/pisi/.config/autostart/".format(image_dir))
         shutil.copy("./data/yali/org.pisilinux.yali.policy",
                     "{}/usr/share/polkit-1/actions/".format(image_dir))
         shutil.copy("./data/yali/yali-rescue.desktop",
@@ -820,23 +795,21 @@ def squash_image(project):
             image_dir, ".".join(kernel_version.split(".")[:2]))
         with open(autoload_module, "w") as autoloads:
             autoloads.write("vfat\n")
-        # kurulumda sorun olmaması için değişiklik yapılan paketler tekrar
-        # yüklenecek
+
+        # kurulumda sorun olmaması için değişiklik yapılan paketler tekrar yüklenecek
         print("baselayout package copy to image_dir")
+       
         baselayout_uri = repo.packages["baselayout"].uri
         if not os.path.exists("%s/var/cache/pisi/packages" % repo.cache_dir):
             os.makedirs("%s/var/cache/pisi/packages" % repo.cache_dir)
 
         os.system("cp -rf %s/%s %s/var/cache/pisi/packages/" % (repo.cache_dir, baselayout_uri, image_dir))
-        # os.system("cp -rf %s/%s %s/var/cache/pisi/packages/" % (repo.cache_dir, repo.packages['kernel'].uri, image_dir))
-
+       
         # kde yapılandırması ================================================
         if 'plasma-workspace' in project.all_install_image_packages:
             # varayılan olacağından kurulumda olmalı
-            # os.system("cp -rf ./data/kde_conf/skel/.config {}/home/pisi".format(image_dir))
-
+            
             # yeni kullanıcıda sık kullanılarlar için skel e eklenmeli
-            # os.system("cp -rf ./data/kde_conf/.local {}/home/pisi".format(image_dir))
             os.system("mkdir -p {}/home/pisi/.config".format(image_dir))
             
             # 05-09-2025 tarihinde eklendi
@@ -844,18 +817,13 @@ def squash_image(project):
             os.system("cp -rf ./data/etc/skel/.config/ {}/etc/skel/".format(image_dir))
             os.system("cp -rf ./data/etc/skel/ {}/etc/".format(image_dir))
             os.system("cp -rf ./data/etc/profile.d/ {}/etc/".format(image_dir))
-            #os.system("cp -rf ./data/etc/ {}/etc/".format(image_dir))
+            
             # /05-09-2025 tarihinde eklendi
-
             os.system("cp -rf ./data/kde_conf/xdg/ {}/etc/".format(image_dir))
             os.system("cp -rf ./data/kde_conf/usr {}/".format(image_dir))
             
 
-            #erkan
             os.system("cp -rf ./data/kde_conf/wallpapers {}/usr/share".format(image_dir))
-            #os.system("cp -rf ./data/etc {}/etc".format(image_dir))
-            # os.system("cp -rf ./data/kde_config/.config {}/home/pisi".format(image_dir))
-            # os.system("cp -rf ./data/kde_config/.local {}/home/pisi".format(image_dir))
             chrun("chown -R pisi:wheel /home/pisi/.config")
             chrun("chown -R pisi:wheel /home/pisi/.local")
 
@@ -871,12 +839,24 @@ def squash_image(project):
 
             # 31-08-2023 kapatıldı
             #os.system("cp -rf ./data/kde_conf/skel/Masaüstü/* {}/home/pisi/Masaüstü/".format(image_dir))
-
-            # os.system("cp -rf %s/%s %s/var/cache/pisi/packages/" % (repo.cache_dir, repo.packages['sddm'].uri, image_dir))
-
-        # kde yapılandırması ================================================
-        # setup_live_sddm(project)
+            #os.system("cp -rf %s/%s %s/var/cache/pisi/packages/" % (repo.cache_dir, repo.packages['sddm'].uri, image_dir))
         
+        #xfce4 yapılandırması 
+        if 'xfdesktop' in project.all_install_image_packages:
+            run("mkdir -p {}/home/pisi/Desktop".format(image_dir))
+
+            shutil.copy("./data/yali/yali.desktop", "{}/home/pisi/Desktop/".format(image_dir))
+            shutil.copy("./data/yali/yali-rescue.desktop", "{}/home/pisi/Desktop/".format(image_dir)) 
+            
+            #shutil.copy("./data/xfce4/yali-desktop-copy.sh", "{}/usr/bin/".format(image_dir))
+            #shutil.copy("./data/xfce4/etc/xdg/autostart/yali-desktop.desktop", "{}/etc/xdg/autostart/".format(image_dir))
+            
+            shutil.copy("./data/xfce4/usr/share/backgrounds/xfce/pisiBackground.jpg", "{}/usr/share/backgrounds/xfce/".format(image_dir))
+            os.system("cp -rf ./data/xfce4/etc/skel/.config/ {}/home/pisi/".format(image_dir))
+            os.system("cp -rf ./data/xfce4/etc/skel/.config/ {}/etc/skel/".format(image_dir))
+            os.system("cp -rf ./data/xfce4/usr/share/themes/ {}/usr/share/".format(image_dir))
+            
+        # kde yapılandırması ================================================
         if 'sddm' in project.all_install_image_packages:
             shutil.copy("./data/sddm/bg.jpg", 
                         "{}/usr/share/sddm/themes/pisilinux".format(image_dir))
@@ -896,27 +876,7 @@ def squash_image(project):
             )
         # display manager yapılandırması ====================================
 
-    # WARNING: bu adım sqfs kurulum ekleneceği için kaldırıldı
-    # # paket listesi
-    # # tüm paketleri kurmak yerine listedeki paketler kurulacak
-    # # daha sonra paketler core ve ortam şeklinde ayrılabilir
-    # packages_txt = "%s/usr/share/yali/install_packages.txt" % image_dir
-    # # print(project.package_collections[0].packages.allPackages)
-    # with open(packages_txt, "w") as _file:
-    #     _file.write("\n".join(
-    #         project.package_collections[0].packages.allPackages))
-
-    # add repository to live image
-    # if project.type == "live":
-    #     # print("="*80)
-    #     # print(project.live_repo_uri)
-    #     # print("="*80)
     if project.live_repo_uri:
-        # run("cp /etc/resolv.conf {}/etc/".format(image_dir))
-        # run('/bin/mount --bind /dev %s/dev' % image_dir)
-        # run('/bin/mount --bind /proc %s/proc' % image_dir)
-        # run('/bin/mount --bind /tmp %s/tmp' % image_dir)
-        # run('/bin/mount --bind /sys %s/sys' % image_dir)
         repo_uris = resolve_repo_uri(project.live_repo_uri)
 
         run("pisi rr -dy -D'{}' live".format(image_dir), ignore_error=True)
@@ -927,13 +887,6 @@ def squash_image(project):
         #31-08-2023 kapatıldı
         run("pisi rr -dy -D'{}' pisilinux-install".format(image_dir), ignore_error=True)
 
-            # run('umount %s/dev' % image_dir)
-            # run('umount %s/proc' % image_dir)
-            # run('umount %s/tmp' % image_dir)
-            # run('umount %s/sys' % image_dir)
-            # run("chroot '{0}' pisi rdb -dy".format(image_dir),
-            #   ignore_error=True)
-
     if project.type == "install":
         if os.path.exists("%s/run/livemedia" % image_dir):
             run("rm %s/run/livemedia" % image_dir)
@@ -943,7 +896,6 @@ def squash_image(project):
     else:
         run("mkdir -p %s/run/pisilinux" % image_dir)
         run("touch %s/run/pisilinux/livemedia" % image_dir)
-        # run("touch %s/run/livemedia" % image_dir)
         run("touch %s/home/pisi/.livemedia" % image_dir)
         
     # 16-11-2025 tarihinde eklendi - paketler yüklenip ayarları 
@@ -964,6 +916,7 @@ def squash_image(project):
     f.write("\n".join(get_exclude_list(project)))
     f.close()
 
+    #squefs oluşturulan bölüm
     mksquashfs_cmd = 'mksquashfs "%s" "%s" -noappend -comp %s -ef "%s"' % (
         image_dir, image_file, project.squashfs_comp_type, temp.name)
     run(mksquashfs_cmd)

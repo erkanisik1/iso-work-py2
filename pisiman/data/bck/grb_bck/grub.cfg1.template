@@ -1,0 +1,29 @@
+insmod iso9660
+insmod part_gpt
+insmod part_msdos
+
+set timeout=10
+
+# Medyayı bulmak için kullanılan işaretçi dosya
+search --set=root --file /.miso
+
+submenu "Pisi Linux" {
+    # %(version)s kısmını ISO scriptiniz doldurmalı, doldurmuyorsa elle yazın.
+    menuentry "PisiLinux Live/Kurulum" --class pisilinux {
+        load_video
+        set gfxpayload=keep
+        # liveroot=PISILINUX etiketi init betiği için zorunludur
+        linux /pisi/boot/kernel %(initcpio)s liveroot=PISILINUX mudur="language:tr,live" quiet splash ---
+        initrd /pisi/boot/initrd
+    }
+
+    menuentry "PisiLinux Güvenli Mod (Safe Mode)" --class pisilinux {
+        load_video
+        linux /pisi/boot/kernel %(initcpio)s liveroot=PISILINUX mudur="language:tr,live,safe" quiet splash nomodeset ---
+        initrd /pisi/boot/initrd
+    }
+
+    menuentry "Yeniden Baslat" --class restart {
+        reboot
+    }
+}

@@ -22,24 +22,30 @@ function load_video {
 
 search --set=cdrom --file /.miso
 set root=$cdrom
+
 insmod font
 insmod gettext
 
-set locale_dir=($root)/EFI/BOOT/grub2/locale
-set lang=tr_TR
+loadfont ($root)/EFI/BOOT/grub2/themes/pisilinux/terminus-14.pf2
+loadfont ($root)/EFI/BOOT/grub2/themes/pisilinux/unifont-regular-16.pf2
 
-set gfxmode=auto
+
+
+# Grafik Modu Ayarları
+set gfxmode=1024x768,800x600,auto
+set gfxpayload=keep
+set gfxterm_font=Unifont
 load_video
 insmod gfxterm
 terminal_input console
 terminal_output gfxterm
-loadfont ($root)/EFI/BOOT/grub2/themes/pisilinux/Exo-Bold-14.pf2
-#loadfont ($root)/EFI/BOOT/grub2/themes/pisilinux/DejaVuSans-Bold-14.pf2
+
 
 insmod gfxmenu
 insmod png
 insmod jpeg
 
+# TEMA YÜKLEME
 set theme=($root)/EFI/BOOT/grub2/themes/pisilinux/theme.txt
 export theme
 

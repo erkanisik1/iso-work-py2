@@ -28,6 +28,13 @@ def size_fmt(size):
     tmp = ".".join(parts)
     return tmp.lstrip("0")
 
+def run(cmd, ignore_error=False):
+    print(cmd)
+    ret = os.system(cmd)
+    if ret and not ignore_error:
+        print("%s returned %s" % (cmd, ret))
+        sys.exit(1)
+
 def xterm_title(message):
     """Set message as console window title."""
     if os.environ.has_key("TERM") and sys.stderr.isatty():

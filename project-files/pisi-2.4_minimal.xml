@@ -6,7 +6,7 @@
     <IsoOutputDir use-project-dir="True"></IsoOutputDir>
     <PackageCollections>
         <PackageCollection default="True">
-            <Id>RYDYZlQPHQYhm8m</Id>
+            <Id>mcFGy8w74P1QuaC</Id>
             <Icon>kde-desktop-collection-icon.png</Icon>
             <Translations>
                 <Translation language="ru_RU">
@@ -74,13 +74,10 @@
                 <SelectedPackage>bbswitch-common</SelectedPackage>
                 <SelectedPackage>bind-tools</SelectedPackage>
                 <SelectedPackage>dmraid</SelectedPackage>
-                <SelectedPackage>gfxboot</SelectedPackage>
-                <SelectedPackage>gfxtheme-pisilinux-install</SelectedPackage>
                 <SelectedPackage>gnupg</SelectedPackage>
                 <SelectedPackage>htop</SelectedPackage>
                 <SelectedPackage>intel-ucode</SelectedPackage>
                 <SelectedPackage>iputils</SelectedPackage>
-                <SelectedPackage>kernel</SelectedPackage>
                 <SelectedPackage>kernel-headers</SelectedPackage>
                 <SelectedPackage>libcanberra</SelectedPackage>
                 <SelectedPackage>libxkbcommon</SelectedPackage>
@@ -97,19 +94,10 @@
                 <SelectedPackage>network-manager-applet</SelectedPackage>
                 <SelectedPackage>ntfs-3g</SelectedPackage>
                 <SelectedPackage>ntp-server</SelectedPackage>
-                <SelectedPackage>openssh</SelectedPackage>
                 <SelectedPackage>parted</SelectedPackage>
                 <SelectedPackage>pisilinux-desktop-services</SelectedPackage>
                 <SelectedPackage>pisilinux-python-xorg</SelectedPackage>
                 <SelectedPackage>pisilinux-splash</SelectedPackage>
-                <SelectedPackage>plymouth</SelectedPackage>
-                <SelectedPackage>plymouth-renderer-x11</SelectedPackage>
-                <SelectedPackage>plymouth-theme-charge</SelectedPackage>
-                <SelectedPackage>plymouth-theme-fade-in</SelectedPackage>
-                <SelectedPackage>plymouth-theme-script</SelectedPackage>
-                <SelectedPackage>plymouth-theme-solar</SelectedPackage>
-                <SelectedPackage>plymouth-theme-spinfinity</SelectedPackage>
-                <SelectedPackage>plymouth-theme-spinner</SelectedPackage>
                 <SelectedPackage>pulseaudio</SelectedPackage>
                 <SelectedPackage>python-argparse</SelectedPackage>
                 <SelectedPackage>python-decorator</SelectedPackage>
@@ -170,6 +158,11 @@
                 <SelectedPackage>xterm</SelectedPackage>
                 <SelectedPackage>xvba-video</SelectedPackage>
                 <SelectedPackage>yali</SelectedPackage>
+                <SelectedPackage>efitools</SelectedPackage>
+                <Package>DirectFB</Package>
+                <Package>DirectX-headers</Package>
+                <Package>ModemManager</Package>
+                <Package>NetworkManager</Package>
                 <Package>a52dec</Package>
                 <Package>aalib</Package>
                 <Package>abseil-cpp</Package>
@@ -194,9 +187,11 @@
                 <Package>baselayout</Package>
                 <Package>bash</Package>
                 <Package>bash-completion</Package>
+                <Package>bashdb</Package>
                 <Package>bbswitch-common</Package>
                 <Package>bc</Package>
                 <Package>bind-libs</Package>
+                <Package>bind-tools</Package>
                 <Package>biosdevname</Package>
                 <Package>bluez</Package>
                 <Package>bluez-libs</Package>
@@ -236,8 +231,6 @@
                 <Package>device-mapper-static</Package>
                 <Package>dhcpcd</Package>
                 <Package>diffutils</Package>
-                <Package>DirectFB</Package>
-                <Package>DirectX-headers</Package>
                 <Package>disktype</Package>
                 <Package>djbfft</Package>
                 <Package>dmidecode</Package>
@@ -282,6 +275,8 @@
                 <Package>gdk-pixbuf</Package>
                 <Package>geoclue</Package>
                 <Package>gettext</Package>
+                <Package>gfxboot</Package>
+                <Package>gfxtheme-pisilinux-install</Package>
                 <Package>giflib</Package>
                 <Package>glib-networking</Package>
                 <Package>glib2</Package>
@@ -299,6 +294,7 @@
                 <Package>glibc-locales-ru</Package>
                 <Package>glibc-locales-sv</Package>
                 <Package>gmp</Package>
+                <Package>gnupg</Package>
                 <Package>gnutls</Package>
                 <Package>gobject-introspection</Package>
                 <Package>gperf</Package>
@@ -327,13 +323,16 @@
                 <Package>harfbuzz</Package>
                 <Package>hdf5</Package>
                 <Package>help2man</Package>
+                <Package>htop</Package>
                 <Package>hwloc</Package>
                 <Package>icon-theme-adwaita</Package>
                 <Package>icu4c</Package>
                 <Package>imath</Package>
                 <Package>imlib2</Package>
+                <Package>intel-ucode</Package>
                 <Package>iproute2</Package>
                 <Package>iptables</Package>
+                <Package>iputils</Package>
                 <Package>iwd</Package>
                 <Package>jack-audio-connection-kit</Package>
                 <Package>jansson</Package>
@@ -344,6 +343,7 @@
                 <Package>json-glib</Package>
                 <Package>kbd</Package>
                 <Package>kernel</Package>
+                <Package>kernel-headers</Package>
                 <Package>keyutils</Package>
                 <Package>kmod</Package>
                 <Package>kvazaar</Package>
@@ -354,6 +354,42 @@
                 <Package>lensfun</Package>
                 <Package>less</Package>
                 <Package>leveldb</Package>
+                <Package>libFS</Package>
+                <Package>libICE</Package>
+                <Package>libSM</Package>
+                <Package>libX11</Package>
+                <Package>libX11-devel</Package>
+                <Package>libXScrnSaver</Package>
+                <Package>libXau</Package>
+                <Package>libXau-devel</Package>
+                <Package>libXaw</Package>
+                <Package>libXcomposite</Package>
+                <Package>libXcursor</Package>
+                <Package>libXdamage</Package>
+                <Package>libXdamage-devel</Package>
+                <Package>libXdmcp</Package>
+                <Package>libXdmcp-devel</Package>
+                <Package>libXext</Package>
+                <Package>libXext-devel</Package>
+                <Package>libXfixes</Package>
+                <Package>libXfixes-devel</Package>
+                <Package>libXfont</Package>
+                <Package>libXfont2</Package>
+                <Package>libXft</Package>
+                <Package>libXi</Package>
+                <Package>libXinerama</Package>
+                <Package>libXmu</Package>
+                <Package>libXpm</Package>
+                <Package>libXrandr</Package>
+                <Package>libXrender</Package>
+                <Package>libXt</Package>
+                <Package>libXtst</Package>
+                <Package>libXv</Package>
+                <Package>libXvMC</Package>
+                <Package>libXxf86dga</Package>
+                <Package>libXxf86misc</Package>
+                <Package>libXxf86vm</Package>
+                <Package>libXxf86vm-devel</Package>
                 <Package>libaio</Package>
                 <Package>libappindicator</Package>
                 <Package>libaribb24</Package>
@@ -410,7 +446,6 @@
                 <Package>libfdk-aac</Package>
                 <Package>libffi</Package>
                 <Package>libfontenc</Package>
-                <Package>libFS</Package>
                 <Package>libftdi</Package>
                 <Package>libgcc</Package>
                 <Package>libgcrypt</Package>
@@ -424,7 +459,6 @@
                 <Package>libgudev</Package>
                 <Package>libgusb</Package>
                 <Package>libheif</Package>
-                <Package>libICE</Package>
                 <Package>libical</Package>
                 <Package>libid3tag</Package>
                 <Package>libidn</Package>
@@ -491,7 +525,6 @@
                 <Package>libsdl3</Package>
                 <Package>libseccomp</Package>
                 <Package>libsecret</Package>
-                <Package>libSM</Package>
                 <Package>libsndfile</Package>
                 <Package>libsocket</Package>
                 <Package>libsodium</Package>
@@ -524,51 +557,18 @@
                 <Package>libvorbis</Package>
                 <Package>libvpx</Package>
                 <Package>libwacom</Package>
-                <Package>libX11</Package>
-                <Package>libX11-devel</Package>
                 <Package>libx86</Package>
-                <Package>libXau</Package>
-                <Package>libXau-devel</Package>
-                <Package>libXaw</Package>
                 <Package>libxcb</Package>
                 <Package>libxcb-devel</Package>
-                <Package>libXcomposite</Package>
                 <Package>libxcrypt</Package>
-                <Package>libXcursor</Package>
                 <Package>libxcvt</Package>
-                <Package>libXdamage</Package>
-                <Package>libXdamage-devel</Package>
-                <Package>libXdmcp</Package>
-                <Package>libXdmcp-devel</Package>
-                <Package>libXext</Package>
-                <Package>libXext-devel</Package>
-                <Package>libXfixes</Package>
-                <Package>libXfixes-devel</Package>
-                <Package>libXfont</Package>
-                <Package>libXfont2</Package>
-                <Package>libXft</Package>
-                <Package>libXi</Package>
-                <Package>libXinerama</Package>
                 <Package>libxkbcommon</Package>
                 <Package>libxkbcommon-devel</Package>
                 <Package>libxkbfile</Package>
                 <Package>libxml2</Package>
                 <Package>libxml2-devel</Package>
-                <Package>libXmu</Package>
-                <Package>libXpm</Package>
-                <Package>libXrandr</Package>
-                <Package>libXrender</Package>
-                <Package>libXScrnSaver</Package>
                 <Package>libxshmfence</Package>
                 <Package>libxslt</Package>
-                <Package>libXt</Package>
-                <Package>libXtst</Package>
-                <Package>libXv</Package>
-                <Package>libXvMC</Package>
-                <Package>libXxf86dga</Package>
-                <Package>libXxf86misc</Package>
-                <Package>libXxf86vm</Package>
-                <Package>libXxf86vm-devel</Package>
                 <Package>libyaml</Package>
                 <Package>libzimg</Package>
                 <Package>linux-atm</Package>
@@ -579,6 +579,7 @@
                 <Package>lm_sensors</Package>
                 <Package>lmdb</Package>
                 <Package>lsb-release</Package>
+                <Package>lsof</Package>
                 <Package>lua</Package>
                 <Package>lvm2</Package>
                 <Package>lvm2-static</Package>
@@ -588,23 +589,29 @@
                 <Package>man-db</Package>
                 <Package>man-pages</Package>
                 <Package>mariadb-lib</Package>
+                <Package>mc</Package>
                 <Package>md4c</Package>
                 <Package>mdadm</Package>
                 <Package>mdadm-static</Package>
+                <Package>medit</Package>
+                <Package>memtest86</Package>
                 <Package>mesa</Package>
                 <Package>mesa-glu</Package>
                 <Package>mingetty</Package>
                 <Package>miscfiles</Package>
                 <Package>mit-kerberos</Package>
                 <Package>mjpegtools</Package>
+                <Package>mkinitramfs</Package>
                 <Package>mobile-broadband-provider-info</Package>
-                <Package>ModemManager</Package>
+                <Package>module-bbswitch</Package>
+                <Package>module-broadcom-wl</Package>
                 <Package>module-broadcom-wl-userspace</Package>
                 <Package>mpdecimal</Package>
                 <Package>mpfr</Package>
                 <Package>mpg123</Package>
                 <Package>mtools</Package>
                 <Package>mudur</Package>
+                <Package>nano</Package>
                 <Package>nasm</Package>
                 <Package>ncompress</Package>
                 <Package>ncurses</Package>
@@ -613,7 +620,7 @@
                 <Package>net-snmp</Package>
                 <Package>net-tools</Package>
                 <Package>nettle</Package>
-                <Package>NetworkManager</Package>
+                <Package>network-manager-applet</Package>
                 <Package>newt</Package>
                 <Package>npth</Package>
                 <Package>nspr</Package>
@@ -621,6 +628,7 @@
                 <Package>nss-mdns</Package>
                 <Package>ntfs-3g</Package>
                 <Package>ntfsprogs</Package>
+                <Package>ntp-server</Package>
                 <Package>numactl</Package>
                 <Package>onetbb</Package>
                 <Package>openal</Package>
@@ -661,7 +669,9 @@
                 <Package>pisilinux-desktop-services</Package>
                 <Package>pisilinux-python</Package>
                 <Package>pisilinux-python-xorg</Package>
+                <Package>pisilinux-splash</Package>
                 <Package>pixman</Package>
+                <Package>plymouth</Package>
                 <Package>plymouth-core-libs</Package>
                 <Package>plymouth-graphics-libs</Package>
                 <Package>plymouth-plugin-fade-throbber</Package>
@@ -669,7 +679,14 @@
                 <Package>plymouth-plugin-script</Package>
                 <Package>plymouth-plugin-space-flares</Package>
                 <Package>plymouth-plugin-two-step</Package>
+                <Package>plymouth-renderer-x11</Package>
+                <Package>plymouth-theme-charge</Package>
+                <Package>plymouth-theme-fade-in</Package>
                 <Package>plymouth-theme-pisilinux</Package>
+                <Package>plymouth-theme-script</Package>
+                <Package>plymouth-theme-solar</Package>
+                <Package>plymouth-theme-spinfinity</Package>
+                <Package>plymouth-theme-spinner</Package>
                 <Package>plyvel</Package>
                 <Package>polkit</Package>
                 <Package>poppler</Package>
@@ -683,12 +700,14 @@
                 <Package>procps</Package>
                 <Package>protobuf</Package>
                 <Package>psmisc</Package>
+                <Package>pulseaudio</Package>
                 <Package>pulseaudio-libs</Package>
                 <Package>pycurl</Package>
                 <Package>pyparted</Package>
                 <Package>pypolkit</Package>
                 <Package>pyqtermwidget5</Package>
                 <Package>python</Package>
+                <Package>python-argparse</Package>
                 <Package>python-audit</Package>
                 <Package>python-decorator</Package>
                 <Package>python-enum34</Package>
@@ -698,6 +717,7 @@
                 <Package>python-pyliblzma</Package>
                 <Package>python-pyqt5-sip</Package>
                 <Package>python-qt5</Package>
+                <Package>python-qt5-devel</Package>
                 <Package>python-sip</Package>
                 <Package>python-six</Package>
                 <Package>python-udev</Package>
@@ -705,17 +725,33 @@
                 <Package>python3-PLY</Package>
                 <Package>qrencode</Package>
                 <Package>qscintilla2</Package>
+                <Package>qscintilla2-python</Package>
                 <Package>qscintilla2-python-common</Package>
+                <Package>qt5-accountsservice</Package>
                 <Package>qt5-base</Package>
+                <Package>qt5-base-devel</Package>
+                <Package>qt5-charts</Package>
+                <Package>qt5-configuration</Package>
                 <Package>qt5-connectivity</Package>
                 <Package>qt5-declarative</Package>
                 <Package>qt5-designer</Package>
+                <Package>qt5-gstreamer</Package>
+                <Package>qt5-imageformats</Package>
+                <Package>qt5-keychain</Package>
                 <Package>qt5-location</Package>
                 <Package>qt5-multimedia</Package>
                 <Package>qt5-phonon</Package>
+                <Package>qt5-phonon-backend-gstreamer</Package>
+                <Package>qt5-qdbusviewer</Package>
+                <Package>qt5-scxml</Package>
                 <Package>qt5-sensors</Package>
+                <Package>qt5-serialbus</Package>
                 <Package>qt5-serialport</Package>
+                <Package>qt5-sql-mysql</Package>
+                <Package>qt5-sql-odbc</Package>
+                <Package>qt5-sql-postgresql</Package>
                 <Package>qt5-svg</Package>
+                <Package>qt5-translations</Package>
                 <Package>qt5-webchannel</Package>
                 <Package>qt5-webkit</Package>
                 <Package>qt5-websockets</Package>
@@ -752,7 +788,10 @@
                 <Package>spidermonkey</Package>
                 <Package>spirv-tools</Package>
                 <Package>sqlite</Package>
+                <Package>squashfs-tools</Package>
                 <Package>srt</Package>
+                <Package>sudo</Package>
+                <Package>suspend</Package>
                 <Package>svt-av1</Package>
                 <Package>sysfsutils</Package>
                 <Package>syslinux</Package>
@@ -770,16 +809,20 @@
                 <Package>tpm2-tss</Package>
                 <Package>tslib</Package>
                 <Package>twolame</Package>
+                <Package>udisks2</Package>
                 <Package>unixODBC</Package>
                 <Package>unzip</Package>
+                <Package>upower</Package>
                 <Package>urlgrabber</Package>
                 <Package>usbutils</Package>
                 <Package>utempter</Package>
                 <Package>util-linux</Package>
+                <Package>uuidd</Package>
                 <Package>v86d</Package>
                 <Package>vala</Package>
                 <Package>vamp-plugin-sdk</Package>
                 <Package>vid.stab</Package>
+                <Package>vim</Package>
                 <Package>vixie-cron</Package>
                 <Package>volume_key</Package>
                 <Package>vulkan</Package>
@@ -792,6 +835,7 @@
                 <Package>wayland-server</Package>
                 <Package>webp</Package>
                 <Package>webrtc-audio-processing-1</Package>
+                <Package>wget</Package>
                 <Package>which</Package>
                 <Package>wireless-regdb</Package>
                 <Package>wireless-tools</Package>
@@ -805,17 +849,44 @@
                 <Package>xcb-util-keysyms</Package>
                 <Package>xcb-util-renderutil</Package>
                 <Package>xcb-util-wm</Package>
+                <Package>xdg-user-dirs</Package>
+                <Package>xdm</Package>
                 <Package>xfsprogs</Package>
                 <Package>xine-lib</Package>
                 <Package>xinit</Package>
+                <Package>xkeyboard-config</Package>
                 <Package>xmlto</Package>
                 <Package>xorg-app</Package>
+                <Package>xorg-input-acecad</Package>
+                <Package>xorg-input-elographics</Package>
+                <Package>xorg-input-evdev</Package>
+                <Package>xorg-input-joystick</Package>
+                <Package>xorg-input-kbd</Package>
+                <Package>xorg-input-libinput</Package>
+                <Package>xorg-input-mouse</Package>
+                <Package>xorg-input-synaptics</Package>
+                <Package>xorg-input-vmmouse</Package>
+                <Package>xorg-input-void</Package>
+                <Package>xorg-input-wacom</Package>
                 <Package>xorg-proto</Package>
                 <Package>xorg-server</Package>
+                <Package>xorg-server-xdmx</Package>
+                <Package>xorg-util</Package>
+                <Package>xorg-video-amdgpu</Package>
+                <Package>xorg-video-dummy</Package>
+                <Package>xorg-video-i128</Package>
+                <Package>xorg-video-intel</Package>
+                <Package>xorg-video-nouveau</Package>
+                <Package>xorg-video-radeon</Package>
+                <Package>xorg-video-v4l</Package>
+                <Package>xorg-video-vesa</Package>
+                <Package>xorg-video-vmware</Package>
                 <Package>xterm</Package>
+                <Package>xvba-video</Package>
                 <Package>xvid</Package>
                 <Package>xz</Package>
                 <Package>xz-devel</Package>
+                <Package>yali</Package>
                 <Package>yali-branding-pisilinux</Package>
                 <Package>yali-theme-pisilinux</Package>
                 <Package>zeromq</Package>
@@ -837,13 +908,10 @@
         <SelectedPackage>bbswitch-common</SelectedPackage>
         <SelectedPackage>bind-tools</SelectedPackage>
         <SelectedPackage>dmraid</SelectedPackage>
-        <SelectedPackage>gfxboot</SelectedPackage>
-        <SelectedPackage>gfxtheme-pisilinux-install</SelectedPackage>
         <SelectedPackage>gnupg</SelectedPackage>
         <SelectedPackage>htop</SelectedPackage>
         <SelectedPackage>intel-ucode</SelectedPackage>
         <SelectedPackage>iputils</SelectedPackage>
-        <SelectedPackage>kernel</SelectedPackage>
         <SelectedPackage>kernel-headers</SelectedPackage>
         <SelectedPackage>libcanberra</SelectedPackage>
         <SelectedPackage>libxkbcommon</SelectedPackage>
@@ -860,19 +928,10 @@
         <SelectedPackage>network-manager-applet</SelectedPackage>
         <SelectedPackage>ntfs-3g</SelectedPackage>
         <SelectedPackage>ntp-server</SelectedPackage>
-        <SelectedPackage>openssh</SelectedPackage>
         <SelectedPackage>parted</SelectedPackage>
         <SelectedPackage>pisilinux-desktop-services</SelectedPackage>
         <SelectedPackage>pisilinux-python-xorg</SelectedPackage>
         <SelectedPackage>pisilinux-splash</SelectedPackage>
-        <SelectedPackage>plymouth</SelectedPackage>
-        <SelectedPackage>plymouth-renderer-x11</SelectedPackage>
-        <SelectedPackage>plymouth-theme-charge</SelectedPackage>
-        <SelectedPackage>plymouth-theme-fade-in</SelectedPackage>
-        <SelectedPackage>plymouth-theme-script</SelectedPackage>
-        <SelectedPackage>plymouth-theme-solar</SelectedPackage>
-        <SelectedPackage>plymouth-theme-spinfinity</SelectedPackage>
-        <SelectedPackage>plymouth-theme-spinner</SelectedPackage>
         <SelectedPackage>pulseaudio</SelectedPackage>
         <SelectedPackage>python-argparse</SelectedPackage>
         <SelectedPackage>python-decorator</SelectedPackage>
@@ -933,6 +992,11 @@
         <SelectedPackage>xterm</SelectedPackage>
         <SelectedPackage>xvba-video</SelectedPackage>
         <SelectedPackage>yali</SelectedPackage>
+        <SelectedPackage>efitools</SelectedPackage>
+        <Package>DirectFB</Package>
+        <Package>DirectX-headers</Package>
+        <Package>ModemManager</Package>
+        <Package>NetworkManager</Package>
         <Package>a52dec</Package>
         <Package>aalib</Package>
         <Package>abseil-cpp</Package>
@@ -957,9 +1021,11 @@
         <Package>baselayout</Package>
         <Package>bash</Package>
         <Package>bash-completion</Package>
+        <Package>bashdb</Package>
         <Package>bbswitch-common</Package>
         <Package>bc</Package>
         <Package>bind-libs</Package>
+        <Package>bind-tools</Package>
         <Package>biosdevname</Package>
         <Package>bluez</Package>
         <Package>bluez-libs</Package>
@@ -999,8 +1065,6 @@
         <Package>device-mapper-static</Package>
         <Package>dhcpcd</Package>
         <Package>diffutils</Package>
-        <Package>DirectFB</Package>
-        <Package>DirectX-headers</Package>
         <Package>disktype</Package>
         <Package>djbfft</Package>
         <Package>dmidecode</Package>
@@ -1045,6 +1109,8 @@
         <Package>gdk-pixbuf</Package>
         <Package>geoclue</Package>
         <Package>gettext</Package>
+        <Package>gfxboot</Package>
+        <Package>gfxtheme-pisilinux-install</Package>
         <Package>giflib</Package>
         <Package>glib-networking</Package>
         <Package>glib2</Package>
@@ -1062,6 +1128,7 @@
         <Package>glibc-locales-ru</Package>
         <Package>glibc-locales-sv</Package>
         <Package>gmp</Package>
+        <Package>gnupg</Package>
         <Package>gnutls</Package>
         <Package>gobject-introspection</Package>
         <Package>gperf</Package>
@@ -1090,13 +1157,16 @@
         <Package>harfbuzz</Package>
         <Package>hdf5</Package>
         <Package>help2man</Package>
+        <Package>htop</Package>
         <Package>hwloc</Package>
         <Package>icon-theme-adwaita</Package>
         <Package>icu4c</Package>
         <Package>imath</Package>
         <Package>imlib2</Package>
+        <Package>intel-ucode</Package>
         <Package>iproute2</Package>
         <Package>iptables</Package>
+        <Package>iputils</Package>
         <Package>iwd</Package>
         <Package>jack-audio-connection-kit</Package>
         <Package>jansson</Package>
@@ -1107,6 +1177,7 @@
         <Package>json-glib</Package>
         <Package>kbd</Package>
         <Package>kernel</Package>
+        <Package>kernel-headers</Package>
         <Package>keyutils</Package>
         <Package>kmod</Package>
         <Package>kvazaar</Package>
@@ -1117,6 +1188,42 @@
         <Package>lensfun</Package>
         <Package>less</Package>
         <Package>leveldb</Package>
+        <Package>libFS</Package>
+        <Package>libICE</Package>
+        <Package>libSM</Package>
+        <Package>libX11</Package>
+        <Package>libX11-devel</Package>
+        <Package>libXScrnSaver</Package>
+        <Package>libXau</Package>
+        <Package>libXau-devel</Package>
+        <Package>libXaw</Package>
+        <Package>libXcomposite</Package>
+        <Package>libXcursor</Package>
+        <Package>libXdamage</Package>
+        <Package>libXdamage-devel</Package>
+        <Package>libXdmcp</Package>
+        <Package>libXdmcp-devel</Package>
+        <Package>libXext</Package>
+        <Package>libXext-devel</Package>
+        <Package>libXfixes</Package>
+        <Package>libXfixes-devel</Package>
+        <Package>libXfont</Package>
+        <Package>libXfont2</Package>
+        <Package>libXft</Package>
+        <Package>libXi</Package>
+        <Package>libXinerama</Package>
+        <Package>libXmu</Package>
+        <Package>libXpm</Package>
+        <Package>libXrandr</Package>
+        <Package>libXrender</Package>
+        <Package>libXt</Package>
+        <Package>libXtst</Package>
+        <Package>libXv</Package>
+        <Package>libXvMC</Package>
+        <Package>libXxf86dga</Package>
+        <Package>libXxf86misc</Package>
+        <Package>libXxf86vm</Package>
+        <Package>libXxf86vm-devel</Package>
         <Package>libaio</Package>
         <Package>libappindicator</Package>
         <Package>libaribb24</Package>
@@ -1173,7 +1280,6 @@
         <Package>libfdk-aac</Package>
         <Package>libffi</Package>
         <Package>libfontenc</Package>
-        <Package>libFS</Package>
         <Package>libftdi</Package>
         <Package>libgcc</Package>
         <Package>libgcrypt</Package>
@@ -1187,7 +1293,6 @@
         <Package>libgudev</Package>
         <Package>libgusb</Package>
         <Package>libheif</Package>
-        <Package>libICE</Package>
         <Package>libical</Package>
         <Package>libid3tag</Package>
         <Package>libidn</Package>
@@ -1254,7 +1359,6 @@
         <Package>libsdl3</Package>
         <Package>libseccomp</Package>
         <Package>libsecret</Package>
-        <Package>libSM</Package>
         <Package>libsndfile</Package>
         <Package>libsocket</Package>
         <Package>libsodium</Package>
@@ -1287,51 +1391,18 @@
         <Package>libvorbis</Package>
         <Package>libvpx</Package>
         <Package>libwacom</Package>
-        <Package>libX11</Package>
-        <Package>libX11-devel</Package>
         <Package>libx86</Package>
-        <Package>libXau</Package>
-        <Package>libXau-devel</Package>
-        <Package>libXaw</Package>
         <Package>libxcb</Package>
         <Package>libxcb-devel</Package>
-        <Package>libXcomposite</Package>
         <Package>libxcrypt</Package>
-        <Package>libXcursor</Package>
         <Package>libxcvt</Package>
-        <Package>libXdamage</Package>
-        <Package>libXdamage-devel</Package>
-        <Package>libXdmcp</Package>
-        <Package>libXdmcp-devel</Package>
-        <Package>libXext</Package>
-        <Package>libXext-devel</Package>
-        <Package>libXfixes</Package>
-        <Package>libXfixes-devel</Package>
-        <Package>libXfont</Package>
-        <Package>libXfont2</Package>
-        <Package>libXft</Package>
-        <Package>libXi</Package>
-        <Package>libXinerama</Package>
         <Package>libxkbcommon</Package>
         <Package>libxkbcommon-devel</Package>
         <Package>libxkbfile</Package>
         <Package>libxml2</Package>
         <Package>libxml2-devel</Package>
-        <Package>libXmu</Package>
-        <Package>libXpm</Package>
-        <Package>libXrandr</Package>
-        <Package>libXrender</Package>
-        <Package>libXScrnSaver</Package>
         <Package>libxshmfence</Package>
         <Package>libxslt</Package>
-        <Package>libXt</Package>
-        <Package>libXtst</Package>
-        <Package>libXv</Package>
-        <Package>libXvMC</Package>
-        <Package>libXxf86dga</Package>
-        <Package>libXxf86misc</Package>
-        <Package>libXxf86vm</Package>
-        <Package>libXxf86vm-devel</Package>
         <Package>libyaml</Package>
         <Package>libzimg</Package>
         <Package>linux-atm</Package>
@@ -1342,6 +1413,7 @@
         <Package>lm_sensors</Package>
         <Package>lmdb</Package>
         <Package>lsb-release</Package>
+        <Package>lsof</Package>
         <Package>lua</Package>
         <Package>lvm2</Package>
         <Package>lvm2-static</Package>
@@ -1351,23 +1423,29 @@
         <Package>man-db</Package>
         <Package>man-pages</Package>
         <Package>mariadb-lib</Package>
+        <Package>mc</Package>
         <Package>md4c</Package>
         <Package>mdadm</Package>
         <Package>mdadm-static</Package>
+        <Package>medit</Package>
+        <Package>memtest86</Package>
         <Package>mesa</Package>
         <Package>mesa-glu</Package>
         <Package>mingetty</Package>
         <Package>miscfiles</Package>
         <Package>mit-kerberos</Package>
         <Package>mjpegtools</Package>
+        <Package>mkinitramfs</Package>
         <Package>mobile-broadband-provider-info</Package>
-        <Package>ModemManager</Package>
+        <Package>module-bbswitch</Package>
+        <Package>module-broadcom-wl</Package>
         <Package>module-broadcom-wl-userspace</Package>
         <Package>mpdecimal</Package>
         <Package>mpfr</Package>
         <Package>mpg123</Package>
         <Package>mtools</Package>
         <Package>mudur</Package>
+        <Package>nano</Package>
         <Package>nasm</Package>
         <Package>ncompress</Package>
         <Package>ncurses</Package>
@@ -1376,7 +1454,7 @@
         <Package>net-snmp</Package>
         <Package>net-tools</Package>
         <Package>nettle</Package>
-        <Package>NetworkManager</Package>
+        <Package>network-manager-applet</Package>
         <Package>newt</Package>
         <Package>npth</Package>
         <Package>nspr</Package>
@@ -1384,6 +1462,7 @@
         <Package>nss-mdns</Package>
         <Package>ntfs-3g</Package>
         <Package>ntfsprogs</Package>
+        <Package>ntp-server</Package>
         <Package>numactl</Package>
         <Package>onetbb</Package>
         <Package>openal</Package>
@@ -1424,7 +1503,9 @@
         <Package>pisilinux-desktop-services</Package>
         <Package>pisilinux-python</Package>
         <Package>pisilinux-python-xorg</Package>
+        <Package>pisilinux-splash</Package>
         <Package>pixman</Package>
+        <Package>plymouth</Package>
         <Package>plymouth-core-libs</Package>
         <Package>plymouth-graphics-libs</Package>
         <Package>plymouth-plugin-fade-throbber</Package>
@@ -1432,7 +1513,14 @@
         <Package>plymouth-plugin-script</Package>
         <Package>plymouth-plugin-space-flares</Package>
         <Package>plymouth-plugin-two-step</Package>
+        <Package>plymouth-renderer-x11</Package>
+        <Package>plymouth-theme-charge</Package>
+        <Package>plymouth-theme-fade-in</Package>
         <Package>plymouth-theme-pisilinux</Package>
+        <Package>plymouth-theme-script</Package>
+        <Package>plymouth-theme-solar</Package>
+        <Package>plymouth-theme-spinfinity</Package>
+        <Package>plymouth-theme-spinner</Package>
         <Package>plyvel</Package>
         <Package>polkit</Package>
         <Package>poppler</Package>
@@ -1446,12 +1534,14 @@
         <Package>procps</Package>
         <Package>protobuf</Package>
         <Package>psmisc</Package>
+        <Package>pulseaudio</Package>
         <Package>pulseaudio-libs</Package>
         <Package>pycurl</Package>
         <Package>pyparted</Package>
         <Package>pypolkit</Package>
         <Package>pyqtermwidget5</Package>
         <Package>python</Package>
+        <Package>python-argparse</Package>
         <Package>python-audit</Package>
         <Package>python-decorator</Package>
         <Package>python-enum34</Package>
@@ -1461,6 +1551,7 @@
         <Package>python-pyliblzma</Package>
         <Package>python-pyqt5-sip</Package>
         <Package>python-qt5</Package>
+        <Package>python-qt5-devel</Package>
         <Package>python-sip</Package>
         <Package>python-six</Package>
         <Package>python-udev</Package>
@@ -1468,17 +1559,33 @@
         <Package>python3-PLY</Package>
         <Package>qrencode</Package>
         <Package>qscintilla2</Package>
+        <Package>qscintilla2-python</Package>
         <Package>qscintilla2-python-common</Package>
+        <Package>qt5-accountsservice</Package>
         <Package>qt5-base</Package>
+        <Package>qt5-base-devel</Package>
+        <Package>qt5-charts</Package>
+        <Package>qt5-configuration</Package>
         <Package>qt5-connectivity</Package>
         <Package>qt5-declarative</Package>
         <Package>qt5-designer</Package>
+        <Package>qt5-gstreamer</Package>
+        <Package>qt5-imageformats</Package>
+        <Package>qt5-keychain</Package>
         <Package>qt5-location</Package>
         <Package>qt5-multimedia</Package>
         <Package>qt5-phonon</Package>
+        <Package>qt5-phonon-backend-gstreamer</Package>
+        <Package>qt5-qdbusviewer</Package>
+        <Package>qt5-scxml</Package>
         <Package>qt5-sensors</Package>
+        <Package>qt5-serialbus</Package>
         <Package>qt5-serialport</Package>
+        <Package>qt5-sql-mysql</Package>
+        <Package>qt5-sql-odbc</Package>
+        <Package>qt5-sql-postgresql</Package>
         <Package>qt5-svg</Package>
+        <Package>qt5-translations</Package>
         <Package>qt5-webchannel</Package>
         <Package>qt5-webkit</Package>
         <Package>qt5-websockets</Package>
@@ -1515,7 +1622,10 @@
         <Package>spidermonkey</Package>
         <Package>spirv-tools</Package>
         <Package>sqlite</Package>
+        <Package>squashfs-tools</Package>
         <Package>srt</Package>
+        <Package>sudo</Package>
+        <Package>suspend</Package>
         <Package>svt-av1</Package>
         <Package>sysfsutils</Package>
         <Package>syslinux</Package>
@@ -1533,16 +1643,20 @@
         <Package>tpm2-tss</Package>
         <Package>tslib</Package>
         <Package>twolame</Package>
+        <Package>udisks2</Package>
         <Package>unixODBC</Package>
         <Package>unzip</Package>
+        <Package>upower</Package>
         <Package>urlgrabber</Package>
         <Package>usbutils</Package>
         <Package>utempter</Package>
         <Package>util-linux</Package>
+        <Package>uuidd</Package>
         <Package>v86d</Package>
         <Package>vala</Package>
         <Package>vamp-plugin-sdk</Package>
         <Package>vid.stab</Package>
+        <Package>vim</Package>
         <Package>vixie-cron</Package>
         <Package>volume_key</Package>
         <Package>vulkan</Package>
@@ -1555,6 +1669,7 @@
         <Package>wayland-server</Package>
         <Package>webp</Package>
         <Package>webrtc-audio-processing-1</Package>
+        <Package>wget</Package>
         <Package>which</Package>
         <Package>wireless-regdb</Package>
         <Package>wireless-tools</Package>
@@ -1568,17 +1683,44 @@
         <Package>xcb-util-keysyms</Package>
         <Package>xcb-util-renderutil</Package>
         <Package>xcb-util-wm</Package>
+        <Package>xdg-user-dirs</Package>
+        <Package>xdm</Package>
         <Package>xfsprogs</Package>
         <Package>xine-lib</Package>
         <Package>xinit</Package>
+        <Package>xkeyboard-config</Package>
         <Package>xmlto</Package>
         <Package>xorg-app</Package>
+        <Package>xorg-input-acecad</Package>
+        <Package>xorg-input-elographics</Package>
+        <Package>xorg-input-evdev</Package>
+        <Package>xorg-input-joystick</Package>
+        <Package>xorg-input-kbd</Package>
+        <Package>xorg-input-libinput</Package>
+        <Package>xorg-input-mouse</Package>
+        <Package>xorg-input-synaptics</Package>
+        <Package>xorg-input-vmmouse</Package>
+        <Package>xorg-input-void</Package>
+        <Package>xorg-input-wacom</Package>
         <Package>xorg-proto</Package>
         <Package>xorg-server</Package>
+        <Package>xorg-server-xdmx</Package>
+        <Package>xorg-util</Package>
+        <Package>xorg-video-amdgpu</Package>
+        <Package>xorg-video-dummy</Package>
+        <Package>xorg-video-i128</Package>
+        <Package>xorg-video-intel</Package>
+        <Package>xorg-video-nouveau</Package>
+        <Package>xorg-video-radeon</Package>
+        <Package>xorg-video-v4l</Package>
+        <Package>xorg-video-vesa</Package>
+        <Package>xorg-video-vmware</Package>
         <Package>xterm</Package>
+        <Package>xvba-video</Package>
         <Package>xvid</Package>
         <Package>xz</Package>
         <Package>xz-devel</Package>
+        <Package>yali</Package>
         <Package>yali-branding-pisilinux</Package>
         <Package>yali-theme-pisilinux</Package>
         <Package>zeromq</Package>
@@ -1617,8 +1759,6 @@
         <SelectedPackage>mkinitramfs</SelectedPackage>
         <SelectedPackage>module-bbswitch</SelectedPackage>
         <SelectedPackage>module-broadcom-wl</SelectedPackage>
-        <SelectedPackage>module-virtualbox</SelectedPackage>
-        <SelectedPackage>module-virtualbox-guest</SelectedPackage>
         <SelectedPackage>nano</SelectedPackage>
         <SelectedPackage>network-manager-applet</SelectedPackage>
         <SelectedPackage>ntfs-3g</SelectedPackage>
@@ -1657,7 +1797,6 @@
         <SelectedPackage>qt5-sql-odbc</SelectedPackage>
         <SelectedPackage>qt5-sql-postgresql</SelectedPackage>
         <SelectedPackage>qt5-translations</SelectedPackage>
-        <SelectedPackage>qt6-virtualkeyboard</SelectedPackage>
         <SelectedPackage>qtermwidget5</SelectedPackage>
         <SelectedPackage>rsync</SelectedPackage>
         <SelectedPackage>squashfs-tools</SelectedPackage>
@@ -1667,8 +1806,6 @@
         <SelectedPackage>upower</SelectedPackage>
         <SelectedPackage>uuidd</SelectedPackage>
         <SelectedPackage>vim</SelectedPackage>
-        <SelectedPackage>virtualbox-guest-iso</SelectedPackage>
-        <SelectedPackage>virtualbox-guest-utils</SelectedPackage>
         <SelectedPackage>wget</SelectedPackage>
         <SelectedPackage>xdg-user-dirs</SelectedPackage>
         <SelectedPackage>xdm</SelectedPackage>
@@ -1849,7 +1986,6 @@
         <Package>groff</Package>
         <Package>grub2</Package>
         <Package>gsm</Package>
-        <Package>gsoap</Package>
         <Package>gst-plugins-bad</Package>
         <Package>gst-plugins-base</Package>
         <Package>gstreamer</Package>
@@ -1865,7 +2001,6 @@
         <Package>hdf5</Package>
         <Package>help2man</Package>
         <Package>htop</Package>
-        <Package>hunspell</Package>
         <Package>hwloc</Package>
         <Package>icon-theme-adwaita</Package>
         <Package>icu4c</Package>
@@ -2017,7 +2152,6 @@
         <Package>libkmod</Package>
         <Package>libksba</Package>
         <Package>liblogging</Package>
-        <Package>liblzf</Package>
         <Package>libmad</Package>
         <Package>libmaxminddb</Package>
         <Package>libmbim</Package>
@@ -2081,7 +2215,6 @@
         <Package>libtirpc</Package>
         <Package>libtommath</Package>
         <Package>libtool-ltdl</Package>
-        <Package>libtpms</Package>
         <Package>libunistring</Package>
         <Package>libunwind</Package>
         <Package>liburcu</Package>
@@ -2096,7 +2229,6 @@
         <Package>libva</Package>
         <Package>libvdpau</Package>
         <Package>libvisual</Package>
-        <Package>libvncserver</Package>
         <Package>libvo-aacenc</Package>
         <Package>libvo-amrwbenc</Package>
         <Package>libvorbis</Package>
@@ -2119,7 +2251,6 @@
         <Package>linux-atm</Package>
         <Package>linux-firmware</Package>
         <Package>lirc</Package>
-        <Package>llvm-clang</Package>
         <Package>llvm-libs</Package>
         <Package>llvm-polly</Package>
         <Package>lm_sensors</Package>
@@ -2152,10 +2283,6 @@
         <Package>module-bbswitch</Package>
         <Package>module-broadcom-wl</Package>
         <Package>module-broadcom-wl-userspace</Package>
-        <Package>module-virtualbox</Package>
-        <Package>module-virtualbox-guest</Package>
-        <Package>module-virtualbox-guest-userspace</Package>
-        <Package>module-virtualbox-userspace</Package>
         <Package>mpdecimal</Package>
         <Package>mpfr</Package>
         <Package>mpg123</Package>
@@ -2307,14 +2434,6 @@
         <Package>qt5-websockets</Package>
         <Package>qt5-x11extras</Package>
         <Package>qt5-xmlpatterns</Package>
-        <Package>qt6-assistant</Package>
-        <Package>qt6-base</Package>
-        <Package>qt6-declarative</Package>
-        <Package>qt6-languageserver</Package>
-        <Package>qt6-scxml</Package>
-        <Package>qt6-sql-sqlite</Package>
-        <Package>qt6-svg</Package>
-        <Package>qt6-virtualkeyboard</Package>
         <Package>qtermwidget5</Package>
         <Package>rav1e</Package>
         <Package>readline</Package>
@@ -2381,10 +2500,6 @@
         <Package>vamp-plugin-sdk</Package>
         <Package>vid.stab</Package>
         <Package>vim</Package>
-        <Package>virt-wrapper</Package>
-        <Package>virtualbox</Package>
-        <Package>virtualbox-guest-iso</Package>
-        <Package>virtualbox-guest-utils</Package>
         <Package>vixie-cron</Package>
         <Package>volume_key</Package>
         <Package>vulkan</Package>
@@ -2407,7 +2522,6 @@
         <Package>xavs</Package>
         <Package>xavs2</Package>
         <Package>xcb-util</Package>
-        <Package>xcb-util-cursor</Package>
         <Package>xcb-util-image</Package>
         <Package>xcb-util-keysyms</Package>
         <Package>xcb-util-renderutil</Package>
