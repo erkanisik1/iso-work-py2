@@ -6,7 +6,7 @@
     <IsoOutputDir use-project-dir="True"></IsoOutputDir>
     <PackageCollections>
         <PackageCollection default="True">
-            <Id>8N3DvLK75lebC6f6</Id>
+            <Id>JsJibBEQNC6Z</Id>
             <Icon>kde-desktop-collection-icon.png</Icon>
             <Translations>
                 <Translation language="ru_RU">
@@ -77,6 +77,7 @@
                 <SelectedPackage>bind-tools</SelectedPackage>
                 <SelectedPackage>capnet-assist</SelectedPackage>
                 <SelectedPackage>firefox</SelectedPackage>
+                <SelectedPackage>firefox-lang-tr</SelectedPackage>
                 <SelectedPackage>gfxboot</SelectedPackage>
                 <SelectedPackage>gfxtheme-pisilinux-install</SelectedPackage>
                 <SelectedPackage>gnupg</SelectedPackage>
@@ -96,9 +97,10 @@
                 <SelectedPackage>module-broadcom-wl</SelectedPackage>
                 <SelectedPackage>nano</SelectedPackage>
                 <SelectedPackage>network-manager-applet</SelectedPackage>
+                <SelectedPackage>nody-greeter</SelectedPackage>
                 <SelectedPackage>ntp-server</SelectedPackage>
                 <SelectedPackage>package-manager</SelectedPackage>
-                <SelectedPackage>pisi-lightdm-greeter</SelectedPackage>
+                <SelectedPackage>pisilinux-lightdm-greeter</SelectedPackage>
                 <SelectedPackage>pisilinux-splash</SelectedPackage>
                 <SelectedPackage>pisilinux-welcome-qt6</SelectedPackage>
                 <SelectedPackage>plymouth</SelectedPackage>
@@ -292,6 +294,7 @@
                 <Package>file-roller</Package>
                 <Package>findutils</Package>
                 <Package>firebird-client</Package>
+                <Package>firefox</Package>
                 <Package>flac</Package>
                 <Package>flex</Package>
                 <Package>flite</Package>
@@ -552,7 +555,6 @@
                 <Package>libkate</Package>
                 <Package>libkmod</Package>
                 <Package>libksba</Package>
-                <Package>liblightdm-qt5</Package>
                 <Package>liblogging</Package>
                 <Package>libmad</Package>
                 <Package>libmanette</Package>
@@ -765,6 +767,7 @@
                 <Package>network-manager-applet</Package>
                 <Package>NetworkManager</Package>
                 <Package>newt</Package>
+                <Package>nody-greeter</Package>
                 <Package>npth</Package>
                 <Package>nspr</Package>
                 <Package>nss</Package>
@@ -848,7 +851,6 @@
                 <Package>piksemel</Package>
                 <Package>pinentry</Package>
                 <Package>pipewire</Package>
-                <Package>pipewire-0.2</Package>
                 <Package>pisi</Package>
                 <Package>pisilinux-desktop-services</Package>
                 <Package>pisilinux-python</Package>
@@ -913,6 +915,7 @@
                 <Package>python3-ordered-set</Package>
                 <Package>python3-packaging</Package>
                 <Package>python3-pexpect</Package>
+                <Package>python3-piksemel</Package>
                 <Package>python3-platformdirs</Package>
                 <Package>python3-PLY</Package>
                 <Package>python3-portend</Package>
@@ -945,7 +948,6 @@
                 <Package>qt5-serialport</Package>
                 <Package>qt5-svg</Package>
                 <Package>qt5-webchannel</Package>
-                <Package>qt5-webengine</Package>
                 <Package>qt5-webkit</Package>
                 <Package>qt5-websockets</Package>
                 <Package>qt5-x11extras</Package>
@@ -1186,6 +1188,7 @@
         <SelectedPackage>bind-tools</SelectedPackage>
         <SelectedPackage>capnet-assist</SelectedPackage>
         <SelectedPackage>firefox</SelectedPackage>
+        <SelectedPackage>firefox-lang-tr</SelectedPackage>
         <SelectedPackage>gfxboot</SelectedPackage>
         <SelectedPackage>gfxtheme-pisilinux-install</SelectedPackage>
         <SelectedPackage>gnupg</SelectedPackage>
@@ -1205,9 +1208,10 @@
         <SelectedPackage>module-broadcom-wl</SelectedPackage>
         <SelectedPackage>nano</SelectedPackage>
         <SelectedPackage>network-manager-applet</SelectedPackage>
+        <SelectedPackage>nody-greeter</SelectedPackage>
         <SelectedPackage>ntp-server</SelectedPackage>
         <SelectedPackage>package-manager</SelectedPackage>
-        <SelectedPackage>pisi-lightdm-greeter</SelectedPackage>
+        <SelectedPackage>pisilinux-lightdm-greeter</SelectedPackage>
         <SelectedPackage>pisilinux-splash</SelectedPackage>
         <SelectedPackage>pisilinux-welcome-qt6</SelectedPackage>
         <SelectedPackage>plymouth</SelectedPackage>
@@ -1401,6 +1405,7 @@
         <Package>file-roller</Package>
         <Package>findutils</Package>
         <Package>firebird-client</Package>
+        <Package>firefox</Package>
         <Package>flac</Package>
         <Package>flex</Package>
         <Package>flite</Package>
@@ -1661,7 +1666,6 @@
         <Package>libkate</Package>
         <Package>libkmod</Package>
         <Package>libksba</Package>
-        <Package>liblightdm-qt5</Package>
         <Package>liblogging</Package>
         <Package>libmad</Package>
         <Package>libmanette</Package>
@@ -1874,6 +1878,7 @@
         <Package>network-manager-applet</Package>
         <Package>NetworkManager</Package>
         <Package>newt</Package>
+        <Package>nody-greeter</Package>
         <Package>npth</Package>
         <Package>nspr</Package>
         <Package>nss</Package>
@@ -1957,7 +1962,6 @@
         <Package>piksemel</Package>
         <Package>pinentry</Package>
         <Package>pipewire</Package>
-        <Package>pipewire-0.2</Package>
         <Package>pisi</Package>
         <Package>pisilinux-desktop-services</Package>
         <Package>pisilinux-python</Package>
@@ -2022,6 +2026,7 @@
         <Package>python3-ordered-set</Package>
         <Package>python3-packaging</Package>
         <Package>python3-pexpect</Package>
+        <Package>python3-piksemel</Package>
         <Package>python3-platformdirs</Package>
         <Package>python3-PLY</Package>
         <Package>python3-portend</Package>
@@ -2054,7 +2059,6 @@
         <Package>qt5-serialport</Package>
         <Package>qt5-svg</Package>
         <Package>qt5-webchannel</Package>
-        <Package>qt5-webengine</Package>
         <Package>qt5-webkit</Package>
         <Package>qt5-websockets</Package>
         <Package>qt5-x11extras</Package>
@@ -2291,7 +2295,9 @@
         <SelectedComponent>x11.server</SelectedComponent>
         <SelectedPackage>bashdb</SelectedPackage>
         <SelectedPackage>bind-tools</SelectedPackage>
+        <SelectedPackage>capnet-assist</SelectedPackage>
         <SelectedPackage>firefox</SelectedPackage>
+        <SelectedPackage>firefox-lang-tr</SelectedPackage>
         <SelectedPackage>gfxboot</SelectedPackage>
         <SelectedPackage>gfxtheme-pisilinux-install</SelectedPackage>
         <SelectedPackage>gnupg</SelectedPackage>
@@ -2311,9 +2317,9 @@
         <SelectedPackage>module-broadcom-wl</SelectedPackage>
         <SelectedPackage>nano</SelectedPackage>
         <SelectedPackage>network-manager-applet</SelectedPackage>
+        <SelectedPackage>nody-greeter</SelectedPackage>
         <SelectedPackage>ntp-server</SelectedPackage>
         <SelectedPackage>package-manager</SelectedPackage>
-        <SelectedPackage>pisi-lightdm-greeter</SelectedPackage>
         <SelectedPackage>pisilinux-splash</SelectedPackage>
         <SelectedPackage>pisilinux-welcome-qt6</SelectedPackage>
         <SelectedPackage>plymouth</SelectedPackage>
@@ -2356,6 +2362,7 @@
         <SelectedPackage>wget</SelectedPackage>
         <SelectedPackage>xcb-util-xrm</SelectedPackage>
         <SelectedPackage>xdg-user-dirs</SelectedPackage>
+        <SelectedPackage>xdotool</SelectedPackage>
         <SelectedPackage>xinit</SelectedPackage>
         <SelectedPackage>xorg-input-acecad</SelectedPackage>
         <SelectedPackage>xorg-input-elographics</SelectedPackage>
@@ -2379,6 +2386,7 @@
         <SelectedPackage>xorg-video-vesa</SelectedPackage>
         <SelectedPackage>xorg-video-vmware</SelectedPackage>
         <SelectedPackage>xvba-video</SelectedPackage>
+        <SelectedPackage>yad</SelectedPackage>
         <SelectedPackage>yali</SelectedPackage>
         <Package>DirectFB</Package>
         <Package>DirectX-headers</Package>
@@ -2439,6 +2447,7 @@
         <Package>ca-certificates</Package>
         <Package>cairo</Package>
         <Package>cairomm</Package>
+        <Package>capnet-assist</Package>
         <Package>catfish</Package>
         <Package>cdparanoia</Package>
         <Package>celt</Package>
@@ -2510,6 +2519,7 @@
         <Package>findutils</Package>
         <Package>firebird-client</Package>
         <Package>firefox</Package>
+        <Package>firefox-lang-tr</Package>
         <Package>flac</Package>
         <Package>flex</Package>
         <Package>flite</Package>
@@ -2569,6 +2579,7 @@
         <Package>gpgmepp</Package>
         <Package>gpm</Package>
         <Package>gptfdisk</Package>
+        <Package>granite7</Package>
         <Package>graphene</Package>
         <Package>graphite2</Package>
         <Package>grep</Package>
@@ -2593,6 +2604,7 @@
         <Package>gtkmm3</Package>
         <Package>gtksourceview4</Package>
         <Package>gtksourceview5</Package>
+        <Package>gtkspell3</Package>
         <Package>guile</Package>
         <Package>gvfs</Package>
         <Package>gvfs-fuse</Package>
@@ -2780,6 +2792,7 @@
         <Package>libfyaml</Package>
         <Package>libgcc</Package>
         <Package>libgcrypt</Package>
+        <Package>libgee</Package>
         <Package>libgexiv2</Package>
         <Package>libgfortran</Package>
         <Package>libglvnd</Package>
@@ -2812,7 +2825,6 @@
         <Package>libkate</Package>
         <Package>libkmod</Package>
         <Package>libksba</Package>
-        <Package>liblightdm-qt5</Package>
         <Package>liblogging</Package>
         <Package>libmad</Package>
         <Package>libmanette</Package>
@@ -2995,6 +3007,7 @@
         <Package>nettle</Package>
         <Package>network-manager-applet</Package>
         <Package>newt</Package>
+        <Package>nody-greeter</Package>
         <Package>npth</Package>
         <Package>nspr</Package>
         <Package>nss</Package>
@@ -3080,9 +3093,7 @@
         <Package>piksemel</Package>
         <Package>pinentry</Package>
         <Package>pipewire</Package>
-        <Package>pipewire-0.2</Package>
         <Package>pisi</Package>
-        <Package>pisi-lightdm-greeter</Package>
         <Package>pisilinux-desktop-services</Package>
         <Package>pisilinux-python</Package>
         <Package>pisilinux-python-xorg</Package>
@@ -3160,6 +3171,7 @@
         <Package>python3-ordered-set</Package>
         <Package>python3-packaging</Package>
         <Package>python3-pexpect</Package>
+        <Package>python3-piksemel</Package>
         <Package>python3-platformdirs</Package>
         <Package>python3-portend</Package>
         <Package>python3-ptyprocess</Package>
@@ -3206,7 +3218,6 @@
         <Package>qt5-translations</Package>
         <Package>qt5-virtualkeyboard</Package>
         <Package>qt5-webchannel</Package>
-        <Package>qt5-webengine</Package>
         <Package>qt5-webkit</Package>
         <Package>qt5-websockets</Package>
         <Package>qt5-x11extras</Package>
@@ -3351,6 +3362,7 @@
         <Package>wayland-protocols</Package>
         <Package>wayland-server</Package>
         <Package>webkit2gtk-4.1</Package>
+        <Package>webkit2gtk-6.0</Package>
         <Package>webp</Package>
         <Package>webrtc-audio-processing-1</Package>
         <Package>wget</Package>
@@ -3374,6 +3386,7 @@
         <Package>xdg-dbus-proxy</Package>
         <Package>xdg-user-dirs</Package>
         <Package>xdg-utils</Package>
+        <Package>xdotool</Package>
         <Package>xfburn</Package>
         <Package>xfce-polkit</Package>
         <Package>xfce4-appfinder</Package>
@@ -3456,6 +3469,7 @@
         <Package>xvid</Package>
         <Package>xz</Package>
         <Package>xz-devel</Package>
+        <Package>yad</Package>
         <Package>yali</Package>
         <Package>yali-branding-pisilinux</Package>
         <Package>yali-theme-pisilinux</Package>

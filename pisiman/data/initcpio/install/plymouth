@@ -1,0 +1,45 @@
+#!/bin/bash
+
+build() {
+    local _dir
+
+    add_binary plymouth
+    add_binary plymouthd
+
+    # Ana konfigürasyon
+    add_file /etc/plymouth/plymouthd.conf
+
+    # Temel kütüphaneler
+    for _lib in /usr/lib/plymouth/*.so; do
+        add_file "$_lib"
+    done
+
+    # Renderer'lar
+    for _lib in /usr/lib/plymouth/renderers/*.so; do
+        add_file "$_lib"
+    done
+
+    # script modülü (tema bunu kullanıyor)
+    add_file /usr/lib/plymouth/script.so
+
+    # Pisilinux tema dosyaları
+    add_file /usr/share/plymouth/themes/pisilinux/pisilinux.plymouth
+    add_file /usr/share/plymouth/themes/pisilinux/pisilinux.script
+    add_file /usr/share/plymouth/themes/pisilinux/logo.png
+    add_file /usr/share/plymouth/themes/pisilinux/logo_blurred.png
+
+    # Varsayılan tema linki
+    add_symlink /usr/share/plymouth/themes/default.plymouth \
+        /usr/share/plymouth/themes/pisilinux/pisilinux.plymouth
+
+    # Runtime dizini
+    add_dir /run/plymouth
+
+    add_runscript
+}
+
+help() {
+    cat <<HELPEOF
+Plymouth splash screen with Pisilinux theme.
+HELPEOF
+}

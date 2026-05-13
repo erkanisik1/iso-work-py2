@@ -1,0 +1,8 @@
+#!/bin/bash
+
+run_hook() {
+    mount -t tmpfs tmpfs /run/miso/cowspace
+    mount -t overlay overlay \
+        -o lowerdir=/run/miso/sfs/root,upperdir=/run/miso/cowspace/upper,workdir=/run/miso/cowspace/work \
+        /new_root
+}

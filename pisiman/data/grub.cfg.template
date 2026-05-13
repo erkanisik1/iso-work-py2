@@ -23,6 +23,7 @@ function load_video {
 search --set=cdrom --file /.miso
 set root=$cdrom
 
+
 insmod font
 insmod gettext
 
@@ -60,17 +61,17 @@ set menu_color_highlight=white/red
 submenu "Türkçe" --class lang_tr {
 
     menuentry "PisiLinux UEFI - GPT Kurucusu" --class pisilinux {
-        linux /pisi/boot/kernel %(initcpio)s mudur="language:tr,live" quiet splash ---
+        linux /pisi/boot/kernel rdinit=/init mudur="language:tr,live" quiet splash ---
         initrd /pisi/boot/initrd
     }
 
     menuentry "PisiLinux UEFI - Güvenli Mod" --class pisilinux {
-        linux /pisi/boot/kernel %(initcpio)s mudur="language:tr,live,safe" quiet splash nomodeset ---
+        linux /pisi/boot/kernel rdinit=/init mudur="language:tr,live,safe" quiet splash ---
         initrd /pisi/boot/initrd
     }
 
     menuentry "PisiLinux UEFI - Kurtarıcı" --class recovery {
-        linux /pisi/boot/kernel %(initcpio)s yali=rescue ---
+        linux /pisi/boot/kernel rdinit=/init yali=rescue ---
         initrd /pisi/boot/initrd
     }
 
@@ -86,17 +87,17 @@ submenu "Türkçe" --class lang_tr {
 submenu "English" --class lang_en_us {
 
     menuentry "PisiLinux UEFI - GPT Installing" --class pisilinux {
-        linux /pisi/boot/kernel %(initcpio)s mudur="language:en,live" quiet splash ---
+        linux /pisi/boot/kernel rdinit=/init mudur="language:en,live" quiet splash ---
         initrd /pisi/boot/initrd
     }
 
     menuentry "PisiLinux UEFI - Safe Mode" --class pisilinux {
-        linux /pisi/boot/kernel %(initcpio)s mudur="language:en,live,safe" quiet splash nomodeset ---
+        linux /pisi/boot/kernel rdinit=/init mudur="language:en,live,safe" quiet splash nomodeset ---
         initrd /pisi/boot/initrd
     }
 
     menuentry "PisiLinux UEFI - Rescue" --class recovery {
-        linux /pisi/boot/kernel %(initcpio)s yali=rescue ---
+        linux /pisi/boot/kernel rdinit=/init yali=rescue ---
         initrd /pisi/boot/initrd
     }
 

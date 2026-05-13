@@ -1,0 +1,16 @@
+#!/bin/bash
+
+run_hook() {
+    # Plymouth başlat
+    mount -t devtmpfs devtmpfs /dev 2>/dev/null
+    mount -t proc proc /proc 2>/dev/null
+
+    plymouthd --mode=boot --attach-to-session --pid-file=/run/plymouth/pid 2>/dev/null
+
+    plymouth show-splash 2>/dev/null
+}
+
+run_cleanuphook() {
+    # Plymouth'u kapat
+    plymouth quit 2>/dev/null
+}

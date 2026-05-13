@@ -1,0 +1,6 @@
+[Desktop Entry]
+Type=Link
+Name=HOME
+Name[tr]=EV
+Icon=user-home
+URL[$e]=$HOME

@@ -13,6 +13,7 @@
 
 import os
 import sys
+import shutil
 
 def I18N_NOOP(x):
     return x
@@ -60,3 +61,6 @@ def wait_bus(unix_name, timeout=5, wait=0.1, stream=True):
             timeout -= wait
         time.sleep(wait)
     return False
+
+def copy(src, dest):
+    run('cp -PR "%s" "%s"' % (src, dest))

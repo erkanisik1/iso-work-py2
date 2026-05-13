@@ -239,12 +239,20 @@ miso_mount_handler() {
     mount -t tmpfs -o "size=${rw_branch_size}",mode=0755 rw_branch /rw_branch
     msg "done."
 
-    msg ":: Mounting root (aufs) filesystem"
-    /bin/mount -t aufs -o dirs=/rw_branch=rw union "${newroot}"
+    msg ":: Mounting root (overlay) filesystem"
+    mkdir -p /run/miso/overlay_root/upper
+    mkdir -p /run/miso/overlay_root/work
+    /bin/mount -t overlay overlay -o lowerdir=/,upperdir=/run/miso/overlay_root/upper,workdir=/run/miso/overlay_root/work "${newroot}"
     if [ $? -ne 0 ]; then
-        echo ">> ERROR: while mounting root (aufs) filesystem."
+        echo ">> ERROR: while mounting root (overlay) filesystem."
         launch_interactive_shell
     fi
+
+    # Bind mount /dev, /proc, /sys into newroot
+    msg ":: Mounting /dev, /proc, /sys into newroot"
+    mount --bind /dev "${newroot}/dev"
+    mount --bind /proc "${newroot}/proc"
+    mount --bind /sys "${newroot}/sys"
 
     msg ":: Mounting images"
     while read img imgarch mountpoint type kernelarg; do
@@ -268,6 +276,13 @@ miso_mount_handler() {
             _mnt_squashfs "/bootmnt/${misobasedir}/${img}" "${newroot}${mountpoint}"
         fi
     done < "${isomounts}"
+
+    # Yali kurulum aracinin fstab yazabilmesi icin newroot altinda /etc olmali
+    msg ":: Ensuring /etc exists in newroot for Yali installer"
+    mkdir -p "${newroot}/etc"
+    mkdir -p "${newroot}/mnt"
+    mkdir -p "${newroot}/mnt/target"
+    mkdir -p "${newroot}/mnt/target/etc"
 
     if [ "${copytoram}" = "y" ]; then
         /bin/umount /bootmnt

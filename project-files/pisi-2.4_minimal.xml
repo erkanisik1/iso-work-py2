@@ -1,7 +1,7 @@
 <PardusmanProject type="install" compression="xz">
     <Title>Pisi Linux 2.4.4 Minimal x86_64</Title>
-    <WorkDir>/home/erkanisik/newiso/minimal-2.4.4-1</WorkDir>
-    <ReleaseFiles>/home/erkanisik/iso-work/release-files/pisilinux/media-content-template</ReleaseFiles>
+    <WorkDir>/home/erkanisik/newiso/minimal-2.4.4-2</WorkDir>
+    <ReleaseFiles>/media/yedekleme/projects/iso-work/release-files/pisilinux/media-content-template</ReleaseFiles>
     <LiveRepo>https://stable2.pisilinux.org/pisi-index.xml.xz</LiveRepo>
     <IsoOutputDir use-project-dir="True"></IsoOutputDir>
     <PackageCollections>
@@ -74,6 +74,7 @@
                 <SelectedPackage>bbswitch-common</SelectedPackage>
                 <SelectedPackage>bind-tools</SelectedPackage>
                 <SelectedPackage>dmraid</SelectedPackage>
+                <SelectedPackage>efitools</SelectedPackage>
                 <SelectedPackage>gnupg</SelectedPackage>
                 <SelectedPackage>htop</SelectedPackage>
                 <SelectedPackage>intel-ucode</SelectedPackage>
@@ -158,7 +159,6 @@
                 <SelectedPackage>xterm</SelectedPackage>
                 <SelectedPackage>xvba-video</SelectedPackage>
                 <SelectedPackage>yali</SelectedPackage>
-                <SelectedPackage>efitools</SelectedPackage>
                 <Package>DirectFB</Package>
                 <Package>DirectX-headers</Package>
                 <Package>ModemManager</Package>
@@ -908,6 +908,7 @@
         <SelectedPackage>bbswitch-common</SelectedPackage>
         <SelectedPackage>bind-tools</SelectedPackage>
         <SelectedPackage>dmraid</SelectedPackage>
+        <SelectedPackage>efitools</SelectedPackage>
         <SelectedPackage>gnupg</SelectedPackage>
         <SelectedPackage>htop</SelectedPackage>
         <SelectedPackage>intel-ucode</SelectedPackage>
@@ -992,7 +993,6 @@
         <SelectedPackage>xterm</SelectedPackage>
         <SelectedPackage>xvba-video</SelectedPackage>
         <SelectedPackage>yali</SelectedPackage>
-        <SelectedPackage>efitools</SelectedPackage>
         <Package>DirectFB</Package>
         <Package>DirectX-headers</Package>
         <Package>ModemManager</Package>
@@ -1740,13 +1740,11 @@
         <SelectedPackage>bbswitch-common</SelectedPackage>
         <SelectedPackage>bind-tools</SelectedPackage>
         <SelectedPackage>dmraid</SelectedPackage>
-        <SelectedPackage>gfxboot</SelectedPackage>
-        <SelectedPackage>gfxtheme-pisilinux-install</SelectedPackage>
+        <SelectedPackage>efitools</SelectedPackage>
         <SelectedPackage>gnupg</SelectedPackage>
         <SelectedPackage>htop</SelectedPackage>
         <SelectedPackage>intel-ucode</SelectedPackage>
         <SelectedPackage>iputils</SelectedPackage>
-        <SelectedPackage>kernel</SelectedPackage>
         <SelectedPackage>kernel-headers</SelectedPackage>
         <SelectedPackage>libcanberra</SelectedPackage>
         <SelectedPackage>libxkbcommon</SelectedPackage>
@@ -1763,19 +1761,10 @@
         <SelectedPackage>network-manager-applet</SelectedPackage>
         <SelectedPackage>ntfs-3g</SelectedPackage>
         <SelectedPackage>ntp-server</SelectedPackage>
-        <SelectedPackage>openssh</SelectedPackage>
         <SelectedPackage>parted</SelectedPackage>
         <SelectedPackage>pisilinux-desktop-services</SelectedPackage>
         <SelectedPackage>pisilinux-python-xorg</SelectedPackage>
         <SelectedPackage>pisilinux-splash</SelectedPackage>
-        <SelectedPackage>plymouth</SelectedPackage>
-        <SelectedPackage>plymouth-renderer-x11</SelectedPackage>
-        <SelectedPackage>plymouth-theme-charge</SelectedPackage>
-        <SelectedPackage>plymouth-theme-fade-in</SelectedPackage>
-        <SelectedPackage>plymouth-theme-script</SelectedPackage>
-        <SelectedPackage>plymouth-theme-solar</SelectedPackage>
-        <SelectedPackage>plymouth-theme-spinfinity</SelectedPackage>
-        <SelectedPackage>plymouth-theme-spinner</SelectedPackage>
         <SelectedPackage>pulseaudio</SelectedPackage>
         <SelectedPackage>python-argparse</SelectedPackage>
         <SelectedPackage>python-decorator</SelectedPackage>

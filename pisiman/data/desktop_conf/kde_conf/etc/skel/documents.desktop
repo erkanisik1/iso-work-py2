@@ -1,0 +1,6 @@
+[Desktop Entry]
+Type=Link
+Name[tr]=Belgelerim
+Name[en]=Documents
+Icon=folder-documents
+URL=file://$XDG_DOCUMENTS_DIR

@@ -15,6 +15,11 @@ import os
 import sys
 import stat
 import time
+
+# Scriptin bulunduğu dizine göre data klasörünü bulalım
+_script_dir = os.path.dirname(os.path.abspath(__file__))
+_project_root = os.path.dirname(_script_dir)
+DATA_DIR = os.path.join(_project_root, "data")
 import dbus
 import glob
 import shutil
@@ -25,6 +30,7 @@ import subprocess
 # import pathlib2
 
 from repotools.utility import xterm_title, wait_bus
+from repotools.desktop_config import kde_conf, xfce_conf
 
 #
 # Utilities
@@ -67,7 +73,12 @@ def overlay(project, path, to=None, upperdir = None, workdir=None):
         if not os.path.exists(i):
             os.makedirs(i)
 
-    run('/bin/mount -t overlay overlay -o lowerdir=/{path},upperdir={upperdir},workdir={workdir} {to}'.format(path=path, upperdir=upperdir, workdir=workdir,to=to))
+    # Eski: run('/bin/mount -t overlay overlay -o lowerdir=/{path},upperdir={upperdir},workdir={workdir} {to}'.format(path=path, upperdir=upperdir, workdir=workdir,to=to))
+    # Special handling for /dev - use bind mount instead of overlay
+    if path == "dev":
+        run('/bin/mount --bind /dev {}'.format(to))
+    else:
+        run('/bin/mount -t overlay overlay -o lowerdir=/{path},upperdir={upperdir},workdir={workdir} {to}'.format(path=path, upperdir=upperdir, workdir=workdir,to=to))
 
 def unoverlay(project, path, ignore_error=False):
     image_dir = project.image_dir()
@@ -99,7 +110,8 @@ def chroot_comar(image_dir):
             pass
         os.chroot(image_dir)
         if not os.path.exists("/var/lib/dbus/machine-id"):
-            run("/usr/bin/dbus-uuidgen --ensure")
+            #run("/usr/bin/dbus-uuidgen --ensure")
+            run("/usr/bin/dbus-uuidgen --ensure=/etc/machine-id")
 
         run("/sbin/start-stop-daemon -b --start --pidfile /run/dbus/pid --exec /usr/bin/dbus-daemon -- --system")
         sys.exit(0)
@@ -173,12 +185,34 @@ def mkinitcpio(project):
             copy2("./data/mkinitcpio-live.conf", "etc")
         elif "mkinitramfs" in project.all_install_image_packages:
             prog = "mkinitramfs"
-            binary = os.path.join("/sbin", prog)
+            binary = os.path.join("/sbin/mkinitramfs-live")
             config_path = "/etc/initramfs.conf"
             extra_args = ""
+            
             # FIXME: init dosyası mkinitramfs paketindeki ile değiştirilmeli
+            print("DEBUG: Copying initramfs files from %s to chroot..." % DATA_DIR)
+
+              # FIXME: init dosyası mkinitramfs paketindeki ile değiştirilmeli
             copy2("./data/initramfs/lib", "")
             copy2("./data/initramfs/sbin", "")
+            copy2("./data/initramfs/lib/initramfs/init-live", "%s/lib/initramfs/init-live" % image_dir)
+            copy2("./data/initramfs/sbin/mkinitramfs-live", "%s/sbin/mkinitramfs-live" % image_dir)
+            
+            # lib ve sbin kopyala
+            #lib_src = os.path.join(DATA_DIR, "initramfs/lib")
+            #sbin_src = os.path.join(DATA_DIR, "initramfs/sbin")
+            
+            #if os.path.exists(lib_src):
+            #    run('cp -PR "%s/"* "%s/"' % (lib_src, os.path.join(image_dir, "lib/")))
+            #if os.path.exists(sbin_src):
+            #    run('cp -PR "%s/"* "%s/"' % (sbin_src, os.path.join(image_dir, "sbin/")))
+            
+            # init dosyasını özellikle kontrol edip kopyalayalım
+            #init_src = os.path.join(DATA_DIR, "initramfs/lib/initramfs/init")
+            #init_dest = os.path.join(image_dir, "lib/initramfs/init")
+            #print("DEBUG: Final check for init file: %s -> %s" % (init_src, init_dest))
+            #shutil.copy(init_src, init_dest)
+            
             if os.path.exists(os.path.join(image_dir, "etc/polkit-1/rules.d")):
                 copy2("/etc/polkit-1/rules.d", "etc/polkit-1/")
 
@@ -186,10 +220,11 @@ def mkinitcpio(project):
         # if not os.path.exists(path):
         #    os.makedirs(path)
 
-        # run('/bin/mount --bind /dev %s/dev' % image_dir)
         run('/bin/mount --bind /proc %s/proc' % image_dir)
         run('/bin/mount --bind /sys %s/sys' % image_dir)
-        overlay(project, "dev")
+        run('/bin/mount --bind /dev %s/dev' % image_dir)
+
+        #overlay(project, "dev")
 
         kernel_version = rep.packages['kernel'].version
         # 6.12.31 de kapattım ben Mustafa
@@ -263,12 +298,11 @@ def setup_grub(project):
         #if name.startswith("kernel") or name.startswith("initramfs") or name.startswith("initrd") or name.endswith(".bin") or name.find("ucode"):
         if name.startswith("kernel") or name.startswith("initramfs") or name.startswith("initrd") or name.endswith(".bin"):
             if name.startswith("kernel"):
-                kernel = name
-            elif name.startswith("initramfs"):
-                initramfs = name
-            elif name.startswith("initrd"):
-                initramfs = name
-            copy(os.path.join(path, name), "pisi/boot/" + name)
+                copy(os.path.join(path, name), "pisi/boot/kernel")
+            elif name == "initrd" or name.startswith("initramfs"):
+                copy(os.path.join(path, name), "pisi/boot/initrd")
+            else:
+                copy(os.path.join(path, name), "pisi/boot/" + name)
     # and the other files
     path = os.path.join(image_dir, "pisi/boot/grub")
     for name in os.listdir(path):
@@ -461,13 +495,13 @@ def setup_live_kdm(project):
 # FIXME: bu yapıandırma liveconfig isinli sqfs dosyasına aktarılacak!
 def setup_live_sddm(project):
     image_dir = project.image_dir()
-    shutil.copy("./data/sddm/sddm.conf.d/sddm.conf", "{}/usr/lib/sddm/sddm.conf.d/".format(image_dir))
+    shutil.copy("./data/login_manager/sddm/sddm.conf.d/sddm.conf", "{}/usr/lib/sddm/sddm.conf.d/".format(image_dir))
     shutil.copy("./data/etc/timezone", "{}/etc/".format(image_dir))
    
 # FIXME: bu yapıandırma liveconfig isimli sqfs dosyasına aktarılacak!
 def setup_live_lxdm(project):
     image_dir = project.image_dir()
-    shutil.copy("./data/lxdm/lxdm.conf", "{}/etc/lxdm/".format(image_dir))
+    shutil.copy("./data/login_manager/lxdm/lxdm.conf", "{}/etc/lxdm/".format(image_dir))
 
 
 def setup_live_lightdm(project):
@@ -669,19 +703,19 @@ def squash_live_config_image(project):
 
     if project.type == "live":
         # cp2skel("./data/yali/yali.desktop", ".config/autostart")
-        shutil.copy("./data/yali/yali.desktop",
-                    "{}/usr/share/applications/".format(config_image_dir))
-        shutil.copy("./data/yali/yali.desktop",
-                    "{}/home/pisi/Desktop/".format(config_image_dir))
-     
         # shutil.copy("./data/yali/yali.desktop",
-        #             "{}/home/pisi/.config/autostart/".format(config_image_dir))
-        shutil.copy("./data/yali/org.pisilinux.yali.policy",
-                    "{}/usr/share/polkit-1/actions/".format(config_image_dir))
-        shutil.copy("./data/yali/yali-rescue.desktop",
-                    "{}/usr/share/applications/".format(config_image_dir))
+        #             "{}/usr/share/applications/".format(config_image_dir))
+        # shutil.copy("./data/yali/yali.desktop",
+        #             "{}/home/pisi/Desktop/".format(config_image_dir))
+     
+        # # shutil.copy("./data/yali/yali.desktop",
+        # #             "{}/home/pisi/.config/autostart/".format(config_image_dir))
+        # shutil.copy("./data/yali/org.pisilinux.yali.policy",
+        #             "{}/usr/share/polkit-1/actions/".format(config_image_dir))
+        # shutil.copy("./data/yali/yali-rescue.desktop",
+        #             "{}/usr/share/applications/".format(config_image_dir))
         
-        os.system("cp -rf ./data/kde_conf/usr/share/look-and-feel/maia-light/ {}/usr/share/look-and-feel/".format(config_image_dir))
+        # os.system("cp -rf ./data/kde_conf/usr/share/look-and-feel/maia-light/ {}/usr/share/look-and-feel/".format(config_image_dir))
 
 
 
@@ -782,12 +816,9 @@ def squash_image(project):
     # işlemlerinin büyük bir kısmının yapılmasına gerek kalmayacak
     if project.type == "live":
         # cp2skel("./data/yali/yali.desktop", ".config/autostart")
-        shutil.copy("./data/yali/yali.desktop",
-                    "{}/usr/share/applications/".format(image_dir))
-        shutil.copy("./data/yali/org.pisilinux.yali.policy",
-                    "{}/usr/share/polkit-1/actions/".format(image_dir))
-        shutil.copy("./data/yali/yali-rescue.desktop",
-                    "{}/usr/share/applications/".format(image_dir))
+        shutil.copy("./data/yali/yali.desktop", "{}/usr/share/applications/".format(image_dir))
+        shutil.copy("./data/yali/org.pisilinux.yali.policy", "{}/usr/share/polkit-1/actions/".format(image_dir))
+        shutil.copy("./data/yali/yali-rescue.desktop", "{}/usr/share/applications/".format(image_dir))
         
         repo = project.get_repo()
         kernel_version = repo.packages['kernel'].version
@@ -807,35 +838,35 @@ def squash_image(project):
        
         # kde yapılandırması ================================================
         if 'plasma-workspace' in project.all_install_image_packages:
-            # varayılan olacağından kurulumda olmalı
-            
+            print("kde dosyaları kopyalanıyor")
+            kde_conf(project)
             # yeni kullanıcıda sık kullanılarlar için skel e eklenmeli
-            os.system("mkdir -p {}/home/pisi/.config".format(image_dir))
+            # os.system("mkdir -p {}/home/pisi/.config".format(image_dir))
             
-            # 05-09-2025 tarihinde eklendi
-            os.system("cp -rf ./data/etc/skel/.config {}/home/pisi".format(image_dir))
-            os.system("cp -rf ./data/etc/skel/.config/ {}/etc/skel/".format(image_dir))
-            os.system("cp -rf ./data/etc/skel/ {}/etc/".format(image_dir))
-            os.system("cp -rf ./data/etc/profile.d/ {}/etc/".format(image_dir))
+            # # 05-09-2025 tarihinde eklendi
+            # os.system("cp -rf ./data/etc/skel/.config {}/home/pisi".format(image_dir))
+            # os.system("cp -rf ./data/etc/skel/.config/ {}/etc/skel/".format(image_dir))
+            # os.system("cp -rf ./data/etc/skel/ {}/etc/".format(image_dir))
+            # os.system("cp -rf ./data/etc/profile.d/ {}/etc/".format(image_dir))
             
-            # /05-09-2025 tarihinde eklendi
-            os.system("cp -rf ./data/kde_conf/xdg/ {}/etc/".format(image_dir))
-            os.system("cp -rf ./data/kde_conf/usr {}/".format(image_dir))
+            # # /05-09-2025 tarihinde eklendi
+            # os.system("cp -rf ./data/kde_conf/xdg/ {}/etc/".format(image_dir))
+            # os.system("cp -rf ./data/kde_conf/usr {}/".format(image_dir))
             
 
-            os.system("cp -rf ./data/kde_conf/wallpapers {}/usr/share".format(image_dir))
-            chrun("chown -R pisi:wheel /home/pisi/.config")
-            chrun("chown -R pisi:wheel /home/pisi/.local")
+            # os.system("cp -rf ./data/kde_conf/wallpapers {}/usr/share".format(image_dir))
+            # chrun("chown -R pisi:wheel /home/pisi/.config")
+            # chrun("chown -R pisi:wheel /home/pisi/.local")
 
-            # 31-08-2023 masaüstü kısayolları
-            run("mkdir -p {}/home/pisi/Desktop".format(image_dir))
-            run("mkdir -p {}/home/pisi/Masaüstü".format(image_dir))
+            # # 31-08-2023 masaüstü kısayolları
+            # run("mkdir -p {}/home/pisi/Desktop".format(image_dir))
+            # run("mkdir -p {}/home/pisi/Masaüstü".format(image_dir))
 
-            shutil.copy("./data/yali/yali.desktop", "{}/home/pisi/Desktop/".format(image_dir))
-            shutil.copy("./data/yali/yali.desktop", "{}/home/pisi/Masaüstü/".format(image_dir))
+            # shutil.copy("./data/yali/yali.desktop", "{}/home/pisi/Desktop/".format(image_dir))
+            # shutil.copy("./data/yali/yali.desktop", "{}/home/pisi/Masaüstü/".format(image_dir))
 
-            shutil.copy("./data/yali/yali-rescue.desktop", "{}/home/pisi/Desktop/".format(image_dir))        
-            shutil.copy("./data/yali/yali-rescue.desktop", "{}/home/pisi/Masaüstü/".format(image_dir))
+            # shutil.copy("./data/yali/yali-rescue.desktop", "{}/home/pisi/Desktop/".format(image_dir))        
+            # shutil.copy("./data/yali/yali-rescue.desktop", "{}/home/pisi/Masaüstü/".format(image_dir))
 
             # 31-08-2023 kapatıldı
             #os.system("cp -rf ./data/kde_conf/skel/Masaüstü/* {}/home/pisi/Masaüstü/".format(image_dir))
@@ -843,22 +874,27 @@ def squash_image(project):
         
         #xfce4 yapılandırması 
         if 'xfdesktop' in project.all_install_image_packages:
-            run("mkdir -p {}/home/pisi/Desktop".format(image_dir))
+            # run("mkdir -p {}/home/pisi/Desktop".format(image_dir))
 
-            shutil.copy("./data/yali/yali.desktop", "{}/home/pisi/Desktop/".format(image_dir))
-            shutil.copy("./data/yali/yali-rescue.desktop", "{}/home/pisi/Desktop/".format(image_dir)) 
+            # shutil.copy("./data/yali/yali.desktop", "{}/home/pisi/Desktop/".format(image_dir))
+            # shutil.copy("./data/yali/yali-rescue.desktop", "{}/home/pisi/Desktop/".format(image_dir)) 
             
-            #shutil.copy("./data/xfce4/yali-desktop-copy.sh", "{}/usr/bin/".format(image_dir))
-            #shutil.copy("./data/xfce4/etc/xdg/autostart/yali-desktop.desktop", "{}/etc/xdg/autostart/".format(image_dir))
+            # #shutil.copy("./data/xfce4/yali-desktop-copy.sh", "{}/usr/bin/".format(image_dir))
+            # #shutil.copy("./data/xfce4/etc/xdg/autostart/yali-desktop.desktop", "{}/etc/xdg/autostart/".format(image_dir))
             
-            shutil.copy("./data/xfce4/usr/share/backgrounds/xfce/pisiBackground.jpg", "{}/usr/share/backgrounds/xfce/".format(image_dir))
-            os.system("cp -rf ./data/xfce4/etc/skel/.config/ {}/home/pisi/".format(image_dir))
-            os.system("cp -rf ./data/xfce4/etc/skel/.config/ {}/etc/skel/".format(image_dir))
-            os.system("cp -rf ./data/xfce4/usr/share/themes/ {}/usr/share/".format(image_dir))
+            # shutil.copy("./data/xfce4/usr/share/backgrounds/xfce/pisiBackground.jpg", "{}/usr/share/backgrounds/xfce/".format(image_dir))
+            # shutil.copy("./data/xfce4/etc/lightdm/web-greeter.yml", "{}/etc/lightdm/".format(image_dir))
+            # os.system("cp -rf ./data/xfce4/etc/skel/.config/ {}/home/pisi/".format(image_dir))
+            # os.system("cp -rf ./data/xfce4/etc/skel/.config/ {}/etc/skel/".format(image_dir))
+            # #os.system("cp -rf ./data/xfce4/etc/lightdm/ {}/etc/".format(image_dir))
+
+            # os.system("cp -rf ./data/xfce4/usr/share/ {}/usr/".format(image_dir))
+            xfce_conf(image_dir)
+
             
-        # kde yapılandırması ================================================
+        # sddm yapılandırması ================================================
         if 'sddm' in project.all_install_image_packages:
-            shutil.copy("./data/sddm/bg.jpg", 
+            shutil.copy("./data/login_manager/sddm/bg.jpg", 
                         "{}/usr/share/sddm/themes/pisilinux".format(image_dir))
         
         if 'lxqt-admin' in project.all_install_image_packages:
@@ -1064,7 +1100,7 @@ def make_image(project):
     try:
         repo = project.get_repo()
         repo_dir = project.image_repo_dir()
-#        image_file = project.image_file()
+    #image_file = project.image_file()
 
         image_dir = project.image_dir()
         run('umount -l %s/proc' % image_dir, ignore_error=True)
@@ -1337,8 +1373,8 @@ def make_EFI(project, grub=True):
         def chrun(cmd):
             run('chroot "%s" %s' % (image_dir, cmd))
 
-        run("cp data/mkgrubx64.sh %s/" % image_dir)
-        run("cp data/grub.cfg.template %s/grub.cfg" % image_dir)
+        run("cp %s/mkgrubx64.sh %s/" % (DATA_DIR, image_dir))
+        run("cp %s/grub.cfg.template %s/grub.cfg" % (DATA_DIR, image_dir))
 
         if 'mkinitcpio' in project.all_install_image_packages:
             load_grub_params(project, True)
@@ -1378,8 +1414,7 @@ def make_EFI(project, grub=True):
 
       
       
-        run("rm -rf %s/EFI/pisi" % iso_dir,
-            ignore_error=True)
+        run("rm -rf %s/EFI/pisi" % iso_dir, ignore_error=True)
 
         # grub teması icons dizini yüklenmediği için isoya yüklenmesi
         run("mkdir -p %s/EFI/BOOT/grub2/themes" % iso_dir, ignore_error=True)
@@ -1397,7 +1432,7 @@ def make_EFI(project, grub=True):
         # run("cp %s/en.gkb %s/EFI/boot/" % (image_dir, iso_dir),
         #   ignore_error=True)
 
-        #run("rm %s/grubx64.efi" % image_dir)
+        run("rm %s/grubx64.efi" % image_dir)
         # run("rm %s/EFI/boot/loader.efi" % iso_dir)
         # run("rm %s/EFI/boot/loader.efi" % efi_tmp)
         # grub ################################################################
@@ -1413,9 +1448,88 @@ def make_iso(project, toUSB=False, dev="/dev/sdc1"):
     print("Preparing ISO...")
     xterm_title("Preparing ISO")
 
+    #06-05-2026 eklendi
+
+      ################################
+    try:
+        image_dir = project.image_dir()
+        # iso_dir = project.iso_dir()
+
+        # run('umount %s/dev' % image_dir, ignore_error=True)
+        unoverlay(project, "dev", ignore_error=True)
+        run('umount -l %s/proc' % image_dir, ignore_error=True)
+        run('umount -l %s/sys' % image_dir, ignore_error=True)
+
+
+        def chrun(cmd):
+            run('chroot "%s" %s' % (image_dir, cmd))
+
+        def copy2(src, dest):
+            run('cp -PR "%s" "%s"' % (src, os.path.join(image_dir, dest)))
+
+        # initcpio
+        rep = project.get_repo()
+        print("mkinitcpio" in project.all_install_image_packages)
+        # print(rep.packages.keys())
+        if "mkinitcpio" in project.all_install_image_packages:
+            prog = "mkinitcpio"
+            binary = os.path.join("/usr/bin", prog)
+            config_path = "/etc/mkinitcpio-live.conf"
+            extra_args = " -g /boot/initrd"
+            path = "./data/initcpio"
+            copy2(path, "usr/lib")
+            copy2("./data/mkinitcpio-live.conf", "etc")
+        elif "mkinitramfs" in project.all_install_image_packages:
+            prog = "mkinitramfs-live"
+            binary = os.path.join("/sbin", prog)
+            config_path = "/etc/initramfs.conf"
+            extra_args = ""
+            # FIXME: init dosyası mkinitramfs paketindeki ile değiştirilmeli
+            copy2("./data/initramfs/lib", "")
+            copy2("./data/initramfs/sbin", "")
+            copy2("./data/initramfs/lib/initramfs/init-live", "%s/lib/initramfs/init-live" % image_dir)
+            copy2("./data/initramfs/sbin/mkinitramfs-live", "%s/sbin/mkinitramfs-live" % image_dir)
+
+        # path = os.path.join(image_dir, "boot/pisi")
+        # if not os.path.exists(path):
+        #    os.makedirs(path)
+
+        # run('/bin/mount --bind /dev %s/dev' % image_dir)
+        run('/bin/mount --bind /proc %s/proc' % image_dir)
+        run('/bin/mount --bind /sys %s/sys' % image_dir)
+        run('/bin/mount --bind /dev %s/dev' % image_dir)
+        # overlay(project, "dev") # yemedi nedense olmadı
+
+        kernel_version = rep.packages['kernel'].version
+        # 6.12.31 de kapattım ben Mustafa
+        chrun(" ".join([binary, "-k", kernel_version,
+                       "-c %s" % config_path, extra_args]))
+        # FIXME: kurulmuş sistem init dosyalarını yalı oluşturmalı
+        # ???
+        # if prog == "mkinitcpio":
+        #     chrun(" ".join([binary, "-k", kernel_version, "-g",
+        #                 "/boot/initramfs-%s-fallback.img" % kernel_version,
+        #                 "-S", "autodetect"]))
+        #     # bu kısım yalıya taşınmalı
+        #     chrun(" ".join([binary, "-k", kernel_version,
+        #                 "-c", "/etc/mkinitcpio.conf",
+        #                 "-g", "/boot/initramfs-%s.img" % kernel_version]))
+
+        # run('umount %s/dev' % image_dir)
+        run('umount -l %s/proc' % image_dir)
+        run('umount -l %s/sys' % image_dir)
+        unoverlay(project, "dev")
+    except KeyboardInterrupt:
+        print("Keyboard Interrupt: make_image() cancelled.")
+        sys.exit(1)
+    ############################
+    #/06-05-2026 eklendi
+    
     sort_cd_layout = False
 
     try:
+
+
         iso_dir = project.iso_dir(clean=True)
         iso_file = project.iso_file(clean=True)
         work_dir = project.work_dir
@@ -1427,6 +1541,7 @@ def make_iso(project, toUSB=False, dev="/dev/sdc1"):
             os.makedirs(image_path)
         print(image_file)
         os.link(image_file, os.path.join(iso_dir, "pisi/pisi.sqfs"))
+        
 
         def copy(src, dest):
             dest = os.path.join(iso_dir, dest)
@@ -1504,7 +1619,17 @@ def make_iso(project, toUSB=False, dev="/dev/sdc1"):
         copy("./data/.miso", "")
         run("cp -p %s/efi.img %s/." % (work_dir, iso_dir))
         run("mkdir %s/boot" % iso_dir)
-        run("ln -s %(iso)s/pisi/pisi.sqfs %(iso)s/boot/pisi.sqfs" % {'iso': iso_dir})
+
+        #run("mkdir %s/casper" % iso_dir)
+        #run("mkdir %s/casper/.disk" % iso_dir)
+        #os.link(image_file, os.path.join(iso_dir, "casper/pisi.sqfs"))
+        #run("echo 'PisiLinux 2.4.4' > %s/casper/.disk/info" % iso_dir)
+
+        #run("ln -s %(iso)s/pisi/pisi.sqfs %(iso)s/boot/pisi.sqfs" % {'iso': iso_dir})
+        #run("cp -p %(iso)s/pisi/pisi.sqfs %(iso)s/casper/pisi.sqfs" % {'iso': iso_dir})
+        #run("cp -p %(iso)s/pisi/boot/kernel %(iso)s/casper/kernel" % {'iso': iso_dir})
+        #run("cp -p %(iso)s/pisi/boot/initrd %(iso)s/casper/initrd" % {'iso': iso_dir})
+
 
         publisher = "Pisi GNU/Linux https://pisilinux.org"
         application = "Pisi GNU/Linux Live Media"
